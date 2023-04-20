@@ -24,12 +24,12 @@ public class UserServiceImpl implements UserService {
         user.setUsername(savedUser.getUsername());
         user.setMail(savedUser.getMail());
 
-//        Argon2 argon2 = Argon2Factory.create(Argon2Factory.Argon2Types.ARGON2i);
+        Argon2 argon2 = Argon2Factory.create(Argon2Factory.Argon2Types.ARGON2i);
         //iteration, memory, parallelism
-//        String hashPassword = argon2.hash(2, 1024, 4, savedUser.getPassword());
-//        user.setPassword(hashPassword);
+        String hashPassword = argon2.hash(2, 1024, 4, savedUser.getPassword());
+        user.setPassword(hashPassword);
         user.setPassword(savedUser.getPassword());
-        user.setNumber(savedUser.getNumber());
+//        user.setNumber(savedUser.getNumber());
 
         userRepository.save(user);
 
