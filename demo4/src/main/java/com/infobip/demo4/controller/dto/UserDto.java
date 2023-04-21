@@ -4,7 +4,7 @@ import jakarta.validation.constraints.NotBlank;
 
 public class UserDto {
     @NotBlank(message = "First name is mandatory")
-    private String firstname;
+    private String firstName;
     @NotBlank(message = "Last name is mandatory")
     private String lastName;
     @NotBlank(message = "Username is mandatory")
@@ -16,12 +16,12 @@ public class UserDto {
     @NotBlank(message = "Number is mandatory")
     private String number;
 
-    public String getFirstname() {
-        return firstname;
+    public String getFirstName() {
+        return firstName;
     }
 
-    public void setFirstname(String firstname) {
-        this.firstname = firstname;
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
     }
 
     public String getLastName() {
