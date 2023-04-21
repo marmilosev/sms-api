@@ -54,16 +54,7 @@ public class SmsController {
 
     private ApiResponse apiResponse;
 
-//    private String auth = "mmilosevic:WXMEnxwU8714*"; //parametri
-
-    //    public static String generateAuthorization(String username, String password){
-//        return username + ":" + password;
-//    }
-//    private String auth = generateAuthorization(this.user.getUsername(), this.user.getPassword());
-//    private String encoded;
     public SmsController() throws IOException {
-//        this.encoded = Base64.getEncoder().encodeToString(auth.getBytes(StandardCharsets.UTF_8));
-
     }
 
     @PostConstruct
@@ -139,7 +130,7 @@ public class SmsController {
             apiResponse.setMessage("Poslano");
             // iz smsResponse u SmsResponse prebacit svojtva i
             apiResponse.setSmsResponseDetails(smsResponse.getMessages());
-            apiResponse.setDocsURL("https://gdjevca.com/v1/5");
+            apiResponse.setDocsURL("\"https://mmilosevic-diplomski-api.com/sms/v1/1");
 
             return ResponseEntity.status(HttpStatus.OK).body(apiResponse); //preraditi u JSON response
         } catch (ApiException apiException) {
@@ -147,7 +138,7 @@ public class SmsController {
             apiResponse.setCode(5);
             apiResponse.setMessage(apiException.rawResponseBody());
 
-            apiResponse.setDocsURL("https://gdjevca.com/v1/5");
+            apiResponse.setDocsURL("\"https://mmilosevic-diplomski-api.com/sms/v1/1");
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(apiResponse);
         }
     }
