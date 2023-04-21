@@ -43,6 +43,7 @@ public class MessageController {
         MessageDto messageResponse = modelMapper.map(message, MessageDto.class);
         return ResponseEntity.ok().body(messageResponse);
     }
+
     @PutMapping("/{id}")
     public ResponseEntity<MessageDto> updateMessage(@PathVariable("id") int id, @RequestBody MessageDto messageDto){
         Message messageRequest = modelMapper.map(messageDto, Message.class);

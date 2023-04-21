@@ -3,18 +3,26 @@ package com.infobip.demo4.controller.dto;
 import java.util.Date;
 
 public class MessageDto {
-
-    private UserDto userDto;
+    private int idMessage;
+    private int userId;
     private String number;
     private Date dateTime;
     private String messageText;
 
-    public UserDto getUserDto() {
-        return userDto;
+    public int getIdMessage() {
+        return idMessage;
     }
 
-    public void setUserDto(UserDto userDto) {
-        this.userDto = userDto;
+    public void setIdMessage(int idMessage) {
+        this.idMessage = idMessage;
+    }
+
+    public int getUserId() {
+        return userId;
+    }
+
+    public void setUserId(int userId) {
+        this.userId = userId;
     }
 
     public String getNumber() {

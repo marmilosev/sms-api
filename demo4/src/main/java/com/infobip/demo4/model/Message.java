@@ -11,7 +11,6 @@ public class Message{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int idMessage;
-
     @ManyToOne
     @JoinColumn
     private User user;

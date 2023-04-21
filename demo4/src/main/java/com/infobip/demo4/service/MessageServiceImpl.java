@@ -16,12 +16,6 @@ public class MessageServiceImpl implements MessageService {
 
     @Override
     public Message saveMessage(Message message) {
-//        Message savedMessage = messageRepository.save(message);
-//        message.setIdMessage(savedMessage.getIdMessage());
-//        message.setDateTime(savedMessage.getDateTime());
-//        message.setNumber(savedMessage.getNumber());
-//        message.setUser(savedMessage.getUser());
-//        message.setMessageText(savedMessage.getMessageText());
         return messageRepository.save(message);
     }
 
