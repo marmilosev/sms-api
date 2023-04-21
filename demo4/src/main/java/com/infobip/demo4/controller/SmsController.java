@@ -78,11 +78,11 @@ public class SmsController {
     @ResponseBody
     public ResponseEntity<ApiResponse> sendSMS(@NotNull @RequestBody SmsRequest smsRequest) {
         apiResponse= new ApiResponse();
-        user = userService.findByEmail(smsRequest.getMail());
+        user = userService.findByUsername(smsRequest.getUsername());
 
         if(user== null){
             apiResponse.setCode(1);
-            apiResponse.setMessage("There is no user with provided mail in database");
+            apiResponse.setMessage("There is no user with provided username in database");
             apiResponse.setDocsURL("https://mmilosevic-diplomski-api.com/sms/v1/1");
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(apiResponse);
 
@@ -109,8 +109,6 @@ public class SmsController {
             apiResponse.setDocsURL("https://mmilosevic-diplomski-api.com/sms/v1/4");
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(apiResponse);
         }
-
-        //ovdje sam autoriziran
 
 
         SmsApi smsApi = new SmsApi(apiClient);
