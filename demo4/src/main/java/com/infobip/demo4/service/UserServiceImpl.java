@@ -17,23 +17,21 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User saveUser(User user) {
-        User savedUser = userRepository.save(user);
-        user.setIdUser(savedUser.getIdUser());
-        user.setFirstName(savedUser.getFirstName());
-        user.setLastName(savedUser.getLastName());
-        user.setUsername(savedUser.getUsername());
-        user.setMail(savedUser.getMail());
+        user.setIdUser(user.getIdUser());
+        user.setFirstName(user.getFirstName());
+        user.setLastName(user.getLastName());
+        user.setUsername(user.getUsername());
+        user.setMail(user.getMail());
 
         Argon2 argon2 = Argon2Factory.create(Argon2Factory.Argon2Types.ARGON2i);
         //iteration, memory, parallelism
-        String hashPassword = argon2.hash(2, 1024, 4, savedUser.getPassword());
+        String hashPassword = argon2.hash(2, 1024, 4, user.getPassword());
         user.setPassword(hashPassword);
-        user.setPassword(savedUser.getPassword());
-//        user.setNumber(savedUser.getNumber());
+        user.setPassword(user.getPassword());
 
-        userRepository.save(user);
+        user.setNumber(user.getNumber());
 
-        return user;
+        return userRepository.save(user);
     }
 
 
