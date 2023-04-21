@@ -68,7 +68,7 @@ public class SmsController {
     @PostMapping("/sendSMS")
     @ResponseBody
     public ResponseEntity<ApiResponse> sendSMS(@NotNull @RequestBody SmsRequest smsRequest) {
-        apiResponse= new ApiResponse();
+//        apiResponse= new ApiResponse();
         user = userService.findByUsername(smsRequest.getUsername());
 
         if(user== null){

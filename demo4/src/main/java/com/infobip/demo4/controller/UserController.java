@@ -9,13 +9,9 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
-import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.stream.Collectors;
 
 @RequestMapping("/v1/users")
@@ -40,9 +36,10 @@ public class UserController {
     public List<UserDto> getAllUsers(){
         return userService.getAllUsers().stream().map(user -> modelMapper.map(user, UserDto.class))
                 .collect(Collectors.toList());
-}
 
-        @GetMapping("/{id}")
+    }
+
+    @GetMapping("/{id}")
     public ResponseEntity<UserDto> getUserById(@PathVariable("id") int id){
             User user = userService.getUserById(id);
             UserDto userResponse = modelMapper.map(user, UserDto.class);

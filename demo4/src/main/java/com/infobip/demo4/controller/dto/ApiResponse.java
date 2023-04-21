@@ -13,6 +13,12 @@ public class ApiResponse {
 
     private List<SmsResponseDetails> smsResponseDetails;
 
+    public ApiResponse(int code, String message, String docsURL) {
+        this.code = code;
+        this.message = message;
+        this.docsURL = docsURL;
+    }
+
     public int getCode() {
         return code;
     }
