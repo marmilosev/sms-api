@@ -85,7 +85,7 @@ public class UserController {
             user.setNumber(userDto.getNumber());
             user.setUsername(userDto.getUsername());
             user.setPassword(userDto.getPassword());
-            userService.saveUser(user);
+            userService.updateUser(user);
             jsonResponseMap.put("status", 1);
             jsonResponseMap.put("data", userService.getUserById(id));
             return new ResponseEntity < > (jsonResponseMap, HttpStatus.OK);

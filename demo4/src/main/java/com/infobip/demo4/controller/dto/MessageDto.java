@@ -4,17 +4,17 @@ import java.util.Date;
 
 public class MessageDto {
 
-    private UserDto user;
+    private UserDto userDto;
     private String number;
     private Date dateTime;
     private String messageText;
 
     public UserDto getUserDto() {
-        return user;
+        return userDto;
     }
 
     public void setUserDto(UserDto userDto) {
-        this.user = userDto;
+        this.userDto = userDto;
     }
 
     public String getNumber() {
