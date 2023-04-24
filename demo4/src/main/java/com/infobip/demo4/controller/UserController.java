@@ -1,11 +1,9 @@
 package com.infobip.demo4.controller;
 
-import com.infobip.demo4.controller.dto.ApiResponse;
 import com.infobip.demo4.controller.dto.UserDto;
 import com.infobip.demo4.model.User;
 import com.infobip.demo4.service.UserService;
 import jakarta.validation.Valid;
-import okhttp3.internal.connection.RealConnectionPool;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -23,7 +21,6 @@ public class UserController {
     private UserService userService;
     @Autowired
     private ModelMapper modelMapper;
-    private ApiResponse apiResponse;
 
     @PostMapping("/add")
     public ResponseEntity<User> createUser(@RequestBody @Valid UserDto userDto) {
@@ -46,25 +43,24 @@ public class UserController {
 
     @PutMapping("/{id}")
     public ResponseEntity <User> updateUser(@PathVariable int id, @RequestBody @Valid UserDto userDto) {
-        User userRequest = modelMapper.map(userDto, User.class);
-        userRequest.setIdUser(id);
+        userDto.setIdUser(id);
         User user = userService.updateUser(userDto);
-        UserDto userResponse = modelMapper.map(user, UserDto.class);
-        return new ResponseEntity<>(userService.updateUser(userResponse), HttpStatus.ACCEPTED);
+        return new ResponseEntity<>(userService.updateUser(userDto), HttpStatus.ACCEPTED);
     }
 
     @DeleteMapping("/{id}")
-    public String deleteUser(@PathVariable int id) {
-        return userService.deleteUser(id);
+    public ResponseEntity<Object> deleteUser(@PathVariable int id) {
+        var isRemoved = userService.deleteUser(id);
+        if(isRemoved.isBlank() || isRemoved.isEmpty()) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+        return new ResponseEntity<>(userService.getUserById(id), HttpStatus.OK);
     }
 
 
-//    @PostMapping("/register")
-//    public ResponseEntity<UserDto> registerUser(@Valid @RequestBody UserDto userDto) {
-//        User userRequest = modelMapper.map(userDto, User.class);
-//        User user = userService.saveUser(userRequest);
-//        UserDto userResponse = modelMapper.map(user, UserDto.class);
-//        return new ResponseEntity<UserDto>(userResponse, HttpStatus.CREATED);
-//    }
+    @PostMapping("/register")
+    public ResponseEntity<User> registerUser(@Valid @RequestBody UserDto userDto) {
+        return new ResponseEntity<>(userService.saveUser(userDto), HttpStatus.CREATED);
+    }
 
 }

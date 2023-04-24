@@ -19,29 +19,6 @@ public class ApiResponse {
         this.message = message;
         this.docsURL = docsURL;
     }
-    public ApiResponse(HttpStatus status){
-        this();
-        this.status = status;
-    }
-    ApiResponse(HttpStatus status, Throwable e){
-        this();
-        this.status = status;
-        this.message = "Unexpected error";
-        this.docsURL = e.getLocalizedMessage();
-    }
-
-    public ApiResponse(HttpStatus status, String message, Throwable e){
-        this();
-        this.status = status;
-        this.message = message;
-        this.docsURL = e.getLocalizedMessage();
-    }
-
-
-    public HttpStatus getStatus() {
-        return status;
-    }
-
     public void setStatus(HttpStatus status) {
         this.status = status;
     }

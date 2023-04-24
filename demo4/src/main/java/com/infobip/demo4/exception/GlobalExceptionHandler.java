@@ -1,4 +1,4 @@
-package com.infobip.demo4.config;
+package com.infobip.demo4.exception;
 
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
