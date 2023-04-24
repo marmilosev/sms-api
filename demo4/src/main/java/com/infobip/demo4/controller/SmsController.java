@@ -38,11 +38,11 @@ public class SmsController {
     private String apiKey;
     @Value("${infobip.baseUrl}")
     private String baseUrl;
-//    ApiClient apiClient = ApiClient.forApiKey(ApiKey.from("754db11a7a437bf416ebe4b5c616beb7-afcd6769-7edd-4cbb-bd0c-b1f47409f550"))
-//            .withBaseUrl(BaseUrl.from("https://5vlply.api.infobip.com"))
-//            .build();
+    ApiClient apiClient = ApiClient.forApiKey(ApiKey.from("8a2f62410ac706c5c35eba22ac509794-e0571d30-b2ce-45f3-b400-027c9e4f2eb3"))
+            .withBaseUrl(BaseUrl.from("https://5vlply.api.infobip.com"))
+            .build();
 
-    private ApiClient apiClient;
+//    private ApiClient apiClient;
 
     private User user;
     private Message message;
@@ -57,19 +57,20 @@ public class SmsController {
     public SmsController() throws IOException {
     }
 
-    @PostConstruct
-    public void init() {
-        this.apiClient = ApiClient.forApiKey(ApiKey.from(apiKey))
-            .withBaseUrl(BaseUrl.from(baseUrl))
-            .build();
-    }
+//    @PostConstruct
+//    public void init() {
+//        this.apiClient = ApiClient.forApiKey(ApiKey.from(apiKey))
+//            .withBaseUrl(BaseUrl.from(baseUrl))
+//            .build();
+//    }
 
     //Send SMS when execute
     @PostMapping("/sendSMS")
     @ResponseBody
     public ResponseEntity<ApiResponse> sendSMS(@NotNull @RequestBody SmsRequest smsRequest) {
-//        apiResponse= new ApiResponse();
+        apiResponse= new ApiResponse();
         user = userService.findByUsername(smsRequest.getUsername());
+//        user = userService.findByEmail(smsRequest.getMail());
 
         if(user== null){
             apiResponse.setCode(1);

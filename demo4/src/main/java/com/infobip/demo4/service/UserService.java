@@ -13,7 +13,6 @@ public interface UserService {
     User getUserById(int id);
     String deleteUser(int id);
     User updateUser(User user);
-    User findByNumber(String number);
     User findByUsername(String username);
 }
 

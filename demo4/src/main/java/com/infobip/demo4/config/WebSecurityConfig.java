@@ -49,6 +49,7 @@ public class WebSecurityConfig {
                 // giving permission to every request for /authenticate endpoint
                 .authorizeRequests().requestMatchers("/authenticate").permitAll().
                     requestMatchers("/v1/users/register").permitAll().
+                requestMatchers("/v1/sms/sendSMS").permitAll().
                 // all other requests need to be authenticated
                 // for everything else, the user has to be authenticated
                         anyRequest().authenticated().and().
