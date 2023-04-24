@@ -1,11 +1,12 @@
 package com.infobip.demo4.controller.dto;
 
 import com.infobip.model.SmsResponseDetails;
+import org.springframework.http.HttpStatus;
 
 import java.util.List;
 
 public class ApiResponse {
-
+    private HttpStatus status;
     private int code;
     private String message;
 
@@ -13,10 +14,36 @@ public class ApiResponse {
 
     private List<SmsResponseDetails> smsResponseDetails;
 
-    public ApiResponse(int code, String message, String docsURL) {
+    public ApiResponse() {
         this.code = code;
         this.message = message;
         this.docsURL = docsURL;
+    }
+    public ApiResponse(HttpStatus status){
+        this();
+        this.status = status;
+    }
+    ApiResponse(HttpStatus status, Throwable e){
+        this();
+        this.status = status;
+        this.message = "Unexpected error";
+        this.docsURL = e.getLocalizedMessage();
+    }
+
+    public ApiResponse(HttpStatus status, String message, Throwable e){
+        this();
+        this.status = status;
+        this.message = message;
+        this.docsURL = e.getLocalizedMessage();
+    }
+
+
+    public HttpStatus getStatus() {
+        return status;
+    }
+
+    public void setStatus(HttpStatus status) {
+        this.status = status;
     }
 
     public int getCode() {

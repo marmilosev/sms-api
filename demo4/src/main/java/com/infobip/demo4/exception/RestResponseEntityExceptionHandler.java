@@ -15,21 +15,21 @@ public class RestResponseEntityExceptionHandler extends ResponseEntityExceptionH
 //    private ApiResponse apiResponse;
 
     //to handle other exceptions
-    @ExceptionHandler(value
-            = { IllegalArgumentException.class, IllegalStateException.class })
-    protected ResponseEntity<Object> handleConflict(
-            RuntimeException ex, WebRequest request) {
-        String bodyOfResponse = "This should be application specific";
-        return handleExceptionInternal(ex, bodyOfResponse,
-                new HttpHeaders(), HttpStatus.CONFLICT, request);
-    }
-    @ExceptionHandler(value = { MissingRequestValueException.class })
-    public ResponseEntity<ApiResponse> handleMissingServletRequestParameter(MissingServletRequestParameterException e, WebRequest webRequest){
-        String parameterName = e.getParameterName();
-        int code = e.getStatusCode().value();
-        String message = parameterName + " is missing. Please provide " + parameterName + ". ";
-        String docsUrl = "https://mmilosevic-diplomski-api.com/users/v1/5";
-        ApiResponse apiResponse = new ApiResponse(code, message, docsUrl);
-        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(apiResponse);
-    }
+//    @ExceptionHandler(value
+//            = { IllegalArgumentException.class, IllegalStateException.class })
+//    protected ResponseEntity<Object> handleConflict(
+//            RuntimeException ex, WebRequest request) {
+//        String bodyOfResponse = "This should be application specific";
+//        return handleExceptionInternal(ex, bodyOfResponse,
+//                new HttpHeaders(), HttpStatus.CONFLICT, request);
+//    }
+//    @ExceptionHandler(value = { MissingRequestValueException.class })
+//    public ResponseEntity<ApiResponse> handleMissingServletRequestParameter(MissingServletRequestParameterException e, WebRequest webRequest){
+//        String parameterName = e.getParameterName();
+//        int code = e.getStatusCode().value();
+//        String message = parameterName + " is missing. Please provide " + parameterName + ". ";
+//        String docsUrl = "https://mmilosevic-diplomski-api.com/users/v1/5";
+//        ApiResponse apiResponse = new ApiResponse(code, message, docsUrl);
+//        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(apiResponse);
+//    }
 }
