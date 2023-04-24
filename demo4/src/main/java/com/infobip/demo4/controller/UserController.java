@@ -28,17 +28,18 @@ public class UserController {
     }
 
     @GetMapping
-    public List<UserDto> getAllUsers(){
-        return userService.getAllUsers().stream().map(user -> modelMapper.map(user, UserDto.class))
-                .collect(Collectors.toList());
-
+    public List<User> getAllUsers(){
+        return userService.getAllUsers();
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<UserDto> getUserById(@PathVariable("id") int id){
-            User user = userService.getUserById(id);
-            UserDto userResponse = modelMapper.map(user, UserDto.class);
-            return ResponseEntity.ok().body(userResponse);
+    public ResponseEntity<User> getUserById(@PathVariable("id") int id){
+        User user = userService.getUserById(id);
+        if(user != null) {
+            return ResponseEntity.ok(user);
+        } else{
+            return ResponseEntity.notFound().build();
+        }
     }
 
     @PutMapping("/{id}")
@@ -50,11 +51,7 @@ public class UserController {
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Object> deleteUser(@PathVariable int id) {
-        var isRemoved = userService.deleteUser(id);
-        if(isRemoved.isBlank() || isRemoved.isEmpty()) {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
-        return new ResponseEntity<>(userService.getUserById(id), HttpStatus.OK);
+        return new ResponseEntity<>(userService.deleteUser(id), HttpStatus.OK);
     }
 
 

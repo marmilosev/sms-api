@@ -1,11 +1,13 @@
 package com.infobip.demo4.service;
 
 import com.infobip.demo4.controller.dto.UserDto;
+import com.infobip.demo4.exception.UserNotFoundException;
 import com.infobip.demo4.model.User;
 import com.infobip.demo4.repository.UserRepository;
 import de.mkammerer.argon2.Argon2;
 import de.mkammerer.argon2.Argon2Factory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -47,8 +49,13 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public String deleteUser(int id) {
-        userRepository.deleteById(id);
-        return "User with id " + id + " has been deleted.";
+        Optional<User> optionalUser = userRepository.findById(id);
+        if (optionalUser.isPresent()) {
+            userRepository.deleteById(id);
+            return "User with id " + id + " has been deleted.";
+        } else {
+            throw new UserNotFoundException("User with id " + id + " has not been found.");
+        }
     }
 
     @Override
