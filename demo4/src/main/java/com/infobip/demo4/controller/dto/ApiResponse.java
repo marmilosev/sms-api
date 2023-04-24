@@ -15,10 +15,13 @@ public class ApiResponse {
     private List<SmsResponseDetails> smsResponseDetails;
 
     public ApiResponse() {
+        this.status = status;
         this.code = code;
         this.message = message;
         this.docsURL = docsURL;
+        this.smsResponseDetails = smsResponseDetails;
     }
+
     public void setStatus(HttpStatus status) {
         this.status = status;
     }
