@@ -1,5 +1,6 @@
 package com.infobip.demo4.service;
 
+import com.infobip.demo4.controller.dto.UserDto;
 import com.infobip.demo4.model.User;
 import com.infobip.demo4.repository.UserRepository;
 import de.mkammerer.argon2.Argon2;
@@ -16,20 +17,19 @@ public class UserServiceImpl implements UserService {
     private UserRepository userRepository;
 
     @Override
-    public User saveUser(User user) {
-        user.setIdUser(user.getIdUser());
-        user.setFirstName(user.getFirstName());
-        user.setLastName(user.getLastName());
-        user.setUsername(user.getUsername());
-        user.setMail(user.getMail());
-
+    public User saveUser(UserDto userDto) {
         Argon2 argon2 = Argon2Factory.create(Argon2Factory.Argon2Types.ARGON2i);
         //iteration, memory, parallelism
-        String hashPassword = argon2.hash(2, 1024, 4, user.getPassword());
-        user.setPassword(hashPassword);
-        user.setPassword(user.getPassword());
-
-        user.setNumber(user.getNumber());
+        String hashPassword = argon2.hash(2, 1024, 4, userDto.getPassword());
+        User user = User.builder()
+                .idUser(userDto.getIdUser())
+                .firstName(userDto.getFirstName())
+                .lastName(userDto.getLastName())
+                .username(userDto.getUsername())
+                .mail(userDto.getMail())
+                .number(userDto.getNumber())
+                .password(hashPassword)
+                .build();
 
         return userRepository.save(user);
     }
@@ -52,7 +52,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User updateUser(User user) {
+    public User updateUser(UserDto user) {
         Optional<User> existingUserOptional = userRepository.findById(user.getIdUser());
         if(existingUserOptional.isPresent()) {
             Argon2 argon2 = Argon2Factory.create(Argon2Factory.Argon2Types.ARGON2i);

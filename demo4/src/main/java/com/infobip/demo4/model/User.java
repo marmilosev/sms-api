@@ -1,9 +1,11 @@
 package com.infobip.demo4.model;
 
 import jakarta.persistence.*;
+import lombok.Builder;
 
 @Entity
 @Table(name = "users")
+@Builder
 public class User {
 
     @Id
