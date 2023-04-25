@@ -15,22 +15,22 @@ import lombok.Setter;
 public class UserDto {
     private int idUser;
     @NotBlank(message = "validation.firstNameMandatory")
-    @NotNull(message = "First name is mandatory")
+    @NotNull(message = "validation.firstNameMandatory")
     private String firstName;
-    @NotBlank(message = "Last name is mandatory")
-    @NotNull(message = "Last name is mandatory")
+    @NotBlank(message = "validation.lastNameMandatory")
+    @NotNull(message = "validation.lastNameMandatory")
     private String lastName;
     @NotBlank(message = "validation.userNameMandatory")
-    @NotNull(message = "Username is mandatory")
+    @NotNull(message = "validation.userNameMandatory")
     private String username;
-    @NotBlank(message = "Mail is mandatory")
-    @NotNull(message = "Mail is mandatory")
-    @Email(message = "Invalid email")
+    @NotBlank(message = "validation.mailMandatory")
+    @NotNull(message = "validation.mailMandatory")
+    @Email(message = "validation.mailMandatoryAtSign")
     private String mail;
-    @NotBlank(message = "Password is mandatory")
-    @NotNull(message = "Password is mandatory")
+    @NotBlank(message = "validation.passwordMandatory")
+    @NotNull(message = "validation.passwordMandatory")
     private String password;
-    @NotBlank(message = "Number is mandatory")
-    @NotNull(message = "Number is mandatory")
+    @NotBlank(message = "validation.numberMandatory")
+    @NotNull(message = "validation.numberMandatory")
     private String number;
 }

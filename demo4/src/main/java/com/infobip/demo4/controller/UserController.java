@@ -1,5 +1,6 @@
 package com.infobip.demo4.controller;
 
+import com.infobip.demo4.controller.dto.ApiResponse;
 import com.infobip.demo4.controller.dto.UserDto;
 import com.infobip.demo4.model.User;
 import com.infobip.demo4.service.UserService;
@@ -21,17 +22,20 @@ public class UserController {
     private UserService userService;
     @Autowired
     private ModelMapper modelMapper;
-
+    ApiResponse apiResponse;
     @PostMapping("/add")
-    public ResponseEntity<User> createUser(@RequestBody @Valid UserDto userDto) {
-        return new ResponseEntity<>(userService.saveUser(userDto), HttpStatus.CREATED);
+    public ResponseEntity<ApiResponse> createUser(@RequestBody @Valid UserDto userDto) {
+        apiResponse = new ApiResponse();
+        userService.saveUser(userDto);
+        apiResponse.setCode(8);
+        apiResponse.setMessage("User with username " + userDto.getUsername() + " successfully created.");
+        apiResponse.setDocsURL("https://mmilosevic-diplomski-api.com/users/v1/8");
+        return ResponseEntity.status(HttpStatus.OK).body(apiResponse);
     }
-
     @GetMapping
     public List<User> getAllUsers(){
         return userService.getAllUsers();
     }
-
     @GetMapping("/{id}")
     public ResponseEntity<User> getUserById(@PathVariable("id") int id){
         User user = userService.getUserById(id);
@@ -41,23 +45,28 @@ public class UserController {
             return ResponseEntity.notFound().build();
         }
     }
-
     @PutMapping("/{id}")
-    public ResponseEntity <User> updateUser(@PathVariable int id, @RequestBody @Valid UserDto userDto) {
+    public ResponseEntity <ApiResponse> updateUser(@PathVariable("id") int id, @RequestBody @Valid UserDto userDto) {
+        apiResponse = new ApiResponse();
         userDto.setIdUser(id);
-        User user = userService.updateUser(userDto);
-        return new ResponseEntity<>(userService.updateUser(userDto), HttpStatus.ACCEPTED);
+        userService.updateUser(userDto);
+        apiResponse.setCode(9);
+        apiResponse.setMessage("User with username " + userDto.getUsername() + " successfully updated.");
+        apiResponse.setDocsURL("https://mmilosevic-diplomski-api.com/users/v1/9");
+        return ResponseEntity.status(HttpStatus.OK).body(apiResponse);
     }
-
     @DeleteMapping("/{id}")
     public ResponseEntity<Object> deleteUser(@PathVariable int id) {
         return new ResponseEntity<>(userService.deleteUser(id), HttpStatus.OK);
     }
-
-
     @PostMapping("/register")
-    public ResponseEntity<User> registerUser(@Valid @RequestBody UserDto userDto) {
-        return new ResponseEntity<>(userService.saveUser(userDto), HttpStatus.CREATED);
+    public ResponseEntity<ApiResponse> registerUser(@Valid @RequestBody UserDto userDto) {
+        apiResponse = new ApiResponse();
+        userService.saveUser(userDto);
+        apiResponse.setCode(10);
+        apiResponse.setMessage("User with username " + userDto.getUsername() + " successfully registered.");
+        apiResponse.setDocsURL("https://mmilosevic-diplomski-api.com/users/v1/10");
+        return ResponseEntity.status(HttpStatus.OK).body(apiResponse);
     }
 
 }

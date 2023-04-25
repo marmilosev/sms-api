@@ -42,36 +42,29 @@ public class GlobalExceptionHandler {
 
         return new ResponseEntity<>(errors, new HttpHeaders(), HttpStatus.BAD_REQUEST);
     }
-//    @ExceptionHandler(MethodArgumentNotValidException.class)
-//    public ResponseEntity<ApiResponse> handleValidationErrors(MethodArgumentNotValidException ex) {
-//        apiResponse = new ApiResponse();
-//        apiResponse.setCode(1);
-//        apiResponse.setMessage("Failed. Please check the request data.");
-//        apiResponse.setDocsURL("https://mmilosevic-diplomski-api.com/docs/errors/validation");
-//        return new ResponseEntity<>(apiResponse, new HttpHeaders(), HttpStatus.BAD_REQUEST);
-//    }
 
-//    @ExceptionHandler(UsernameNotFoundException.class)
-//    public ResponseEntity<Map<String, List<String>>> handleNotFoundException(UsernameNotFoundException ex) {
-//        List<String> errors = Collections.singletonList(ex.getMessage());
-//        return new ResponseEntity<>(getErrorsMap(errors), new HttpHeaders(), HttpStatus.NOT_FOUND);
-//    }
-//
-//    @ExceptionHandler(Exception.class)
-//    public final ResponseEntity<Map<String, List<String>>> handleGeneralExceptions(Exception ex) {
-//        List<String> errors = Collections.singletonList(ex.getMessage());
-//        return new ResponseEntity<>(getErrorsMap(errors), new HttpHeaders(), HttpStatus.INTERNAL_SERVER_ERROR);
-//    }
-//
-//    @ExceptionHandler(RuntimeException.class)
-//    public final ResponseEntity<Map<String, List<String>>> handleRuntimeExceptions(RuntimeException ex) {
-//        List<String> errors = Collections.singletonList(ex.getMessage());
-//        return new ResponseEntity<>(getErrorsMap(errors), new HttpHeaders(), HttpStatus.INTERNAL_SERVER_ERROR);
-//    }
-//
-//    private Map<String, List<String>> getErrorsMap(List<String> errors) {
-//        Map<String, List<String>> errorResponse = new HashMap<>();
-//        errorResponse.put("errors", errors);
-//        return errorResponse;
-//    }
+    @ExceptionHandler(UsernameNotFoundException.class)
+    public ResponseEntity<Map<String, List<String>>> handleNotFoundException(UsernameNotFoundException ex) {
+        List<String> errors = Collections.singletonList(ex.getMessage());
+        return new ResponseEntity<>(getErrorsMap(errors), new HttpHeaders(), HttpStatus.NOT_FOUND);
+    }
+
+    //throw invalid ID
+    @ExceptionHandler(Exception.class)
+    public final ResponseEntity<Map<String, List<String>>> handleGeneralExceptions(Exception ex) {
+        List<String> errors = Collections.singletonList(ex.getMessage());
+        return new ResponseEntity<>(getErrorsMap(errors), new HttpHeaders(), HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+
+    @ExceptionHandler(RuntimeException.class)
+    public final ResponseEntity<Map<String, List<String>>> handleRuntimeExceptions(RuntimeException ex) {
+        List<String> errors = Collections.singletonList(ex.getMessage());
+        return new ResponseEntity<>(getErrorsMap(errors), new HttpHeaders(), HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+
+    private Map<String, List<String>> getErrorsMap(List<String> errors) {
+        Map<String, List<String>> errorResponse = new HashMap<>();
+        errorResponse.put("errors", errors);
+        return errorResponse;
+    }
 }
