@@ -3,33 +3,45 @@ package com.infobip.demo4.controller.dto;
 import com.infobip.model.SmsResponseDetails;
 import org.springframework.http.HttpStatus;
 
+import java.util.Date;
 import java.util.List;
 
 public class ApiResponse {
-    private int code;
+    private String code;
     private String message;
 
     private String docsURL;
 
     private List<SmsResponseDetails> smsResponseDetails;
 
+    private Date date;
+
     public ApiResponse() {
 
     }
 
-    public ApiResponse(int code, String message, String docsURL, List<SmsResponseDetails> smsResponseDetails) {
+    public ApiResponse(String code, String message, String docsURL, List<SmsResponseDetails> smsResponseDetails) {
         this.code = code;
         this.message = message;
         this.docsURL = docsURL;
         this.smsResponseDetails = smsResponseDetails;
+//        this.date = date;
     }
 
-    public int getCode() {
+    public String getCode() {
         return code;
     }
 
-    public void setCode(int code) {
+    public void setCode(String code) {
         this.code = code;
+    }
+
+    public Date getDate() {
+        return date;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
     }
 
     public String getMessage() {

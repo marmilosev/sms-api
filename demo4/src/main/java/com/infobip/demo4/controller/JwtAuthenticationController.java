@@ -26,12 +26,12 @@ public class JwtAuthenticationController {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
-    @GetMapping({ "/hello" })
-    public String hello() {
-        return "Hello World";
-    }
+//    @GetMapping({ "/hello" })
+//    public String hello() {
+//        return "Hello World";
+//    }
 
-    @PostMapping("/authenticate")
+    @PostMapping("/v1/authenticate")
     public ResponseEntity<?> createAuthenticationToken(@RequestBody JwtRequest authenticationRequest) throws Exception{
         //authenticate the user based on the provided credentials
         authenticate(authenticationRequest.getUsername(), authenticationRequest.getPassword());

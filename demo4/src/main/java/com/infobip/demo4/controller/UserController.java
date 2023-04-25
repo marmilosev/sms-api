@@ -27,7 +27,7 @@ public class UserController {
     public ResponseEntity<ApiResponse> createUser(@RequestBody @Valid UserDto userDto) {
         apiResponse = new ApiResponse();
         userService.saveUser(userDto);
-        apiResponse.setCode(8);
+        apiResponse.setCode("8");
         apiResponse.setMessage("User with username " + userDto.getUsername() + " successfully created.");
         apiResponse.setDocsURL("https://mmilosevic-diplomski-api.com/users/v1/8");
         return ResponseEntity.status(HttpStatus.OK).body(apiResponse);
@@ -50,7 +50,7 @@ public class UserController {
         apiResponse = new ApiResponse();
         userDto.setIdUser(id);
         userService.updateUser(userDto);
-        apiResponse.setCode(9);
+        apiResponse.setCode("9");
         apiResponse.setMessage("User with username " + userDto.getUsername() + " successfully updated.");
         apiResponse.setDocsURL("https://mmilosevic-diplomski-api.com/users/v1/9");
         return ResponseEntity.status(HttpStatus.OK).body(apiResponse);
@@ -63,7 +63,7 @@ public class UserController {
     public ResponseEntity<ApiResponse> registerUser(@Valid @RequestBody UserDto userDto) {
         apiResponse = new ApiResponse();
         userService.saveUser(userDto);
-        apiResponse.setCode(10);
+        apiResponse.setCode("10");
         apiResponse.setMessage("User with username " + userDto.getUsername() + " successfully registered.");
         apiResponse.setDocsURL("https://mmilosevic-diplomski-api.com/users/v1/10");
         return ResponseEntity.status(HttpStatus.OK).body(apiResponse);

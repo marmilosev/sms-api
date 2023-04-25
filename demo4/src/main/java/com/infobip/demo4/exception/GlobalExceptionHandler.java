@@ -31,9 +31,12 @@ public class GlobalExceptionHandler {
         List<ApiResponse> errors = new ArrayList<>();
         for (var e: ex.getBindingResult().getFieldErrors()) {
             apiResponse= new ApiResponse(
-                    Integer.parseInt(messageSource.getMessage(e.getDefaultMessage() + "Code",null, LocaleContextHolder.getLocale())),
+                    messageSource.getMessage(e.getDefaultMessage() + "Code",null, LocaleContextHolder.getLocale()),
                     messageSource.getMessage(e.getDefaultMessage() + "Message",null,LocaleContextHolder.getLocale()),
-                    messageSource.getMessage(e.getDefaultMessage() + "DocsURL",null,LocaleContextHolder.getLocale()),null);
+                    messageSource.getMessage(e.getDefaultMessage() + "DocsURL",null,LocaleContextHolder.getLocale()),null
+//                    ,
+//                    messageSource.getMessage(e.getDefaultMessage() + "Timestamp", null, LocaleContextHolder.getTimeZone())
+                    );
           //  apiResponse.setCode();
           //  apiResponse.setMessage();
          //   apiResponse.setDocsURL();
