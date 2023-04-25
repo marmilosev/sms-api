@@ -6,7 +6,6 @@ import org.springframework.http.HttpStatus;
 import java.util.List;
 
 public class ApiResponse {
-    private HttpStatus status;
     private int code;
     private String message;
 
@@ -15,15 +14,14 @@ public class ApiResponse {
     private List<SmsResponseDetails> smsResponseDetails;
 
     public ApiResponse() {
-        this.status = status;
+
+    }
+
+    public ApiResponse(int code, String message, String docsURL, List<SmsResponseDetails> smsResponseDetails) {
         this.code = code;
         this.message = message;
         this.docsURL = docsURL;
         this.smsResponseDetails = smsResponseDetails;
-    }
-
-    public void setStatus(HttpStatus status) {
-        this.status = status;
     }
 
     public int getCode() {

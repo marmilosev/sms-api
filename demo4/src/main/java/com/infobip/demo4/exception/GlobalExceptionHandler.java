@@ -1,6 +1,8 @@
 package com.infobip.demo4.exception;
 
 import com.infobip.demo4.controller.dto.ApiResponse;
+import org.springframework.context.i18n.LocaleContextHolder;
+import org.springframework.context.support.ResourceBundleMessageSource;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -10,10 +12,7 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @RestControllerAdvice
@@ -21,20 +20,36 @@ public class GlobalExceptionHandler {
 
     private ApiResponse apiResponse;
 
-//    @ExceptionHandler(MethodArgumentNotValidException.class)
-//    public ResponseEntity<Map<String, List<String>>> handleValidationErrors(MethodArgumentNotValidException ex) {
-//        List<String> errors = ex.getBindingResult().getFieldErrors()
-//                .stream().map(FieldError::getDefaultMessage).collect(Collectors.toList());
-//        return new ResponseEntity<>(getErrorsMap(errors), new HttpHeaders(), HttpStatus.BAD_REQUEST);
-//    }
     @ExceptionHandler(MethodArgumentNotValidException.class)
-    public ResponseEntity<ApiResponse> handleValidationErrors(MethodArgumentNotValidException ex) {
-        apiResponse = new ApiResponse();
-        apiResponse.setCode(1);
-        apiResponse.setMessage("Failed. Please check the request data.");
-        apiResponse.setDocsURL("https://mmilosevic-diplomski-api.com/docs/errors/validation");
-        return new ResponseEntity<>(apiResponse, new HttpHeaders(), HttpStatus.BAD_REQUEST);
+    public ResponseEntity<List<ApiResponse>> handleValidationErrors(MethodArgumentNotValidException ex) {
+       // List<String> errors = ex.getBindingResult().getFieldErrors()
+       //         .stream().map(FieldError::getDefaultMessage).collect(Collectors.toList());
+        ResourceBundleMessageSource messageSource = new ResourceBundleMessageSource();
+        messageSource.setBasename("lang/messages");
+       // Locale en= new Locale("en");
+
+        List<ApiResponse> errors = new ArrayList<>();
+        for (var e: ex.getBindingResult().getFieldErrors()) {
+            apiResponse= new ApiResponse(
+                    Integer.parseInt(messageSource.getMessage(e.getDefaultMessage() + "Code",null, LocaleContextHolder.getLocale())),
+                    messageSource.getMessage(e.getDefaultMessage() + "Message",null,LocaleContextHolder.getLocale()),
+                    messageSource.getMessage(e.getDefaultMessage() + "DocsURL",null,LocaleContextHolder.getLocale()),null);
+          //  apiResponse.setCode();
+          //  apiResponse.setMessage();
+         //   apiResponse.setDocsURL();
+            errors.add(apiResponse);
+        }
+
+        return new ResponseEntity<>(errors, new HttpHeaders(), HttpStatus.BAD_REQUEST);
     }
+//    @ExceptionHandler(MethodArgumentNotValidException.class)
+//    public ResponseEntity<ApiResponse> handleValidationErrors(MethodArgumentNotValidException ex) {
+//        apiResponse = new ApiResponse();
+//        apiResponse.setCode(1);
+//        apiResponse.setMessage("Failed. Please check the request data.");
+//        apiResponse.setDocsURL("https://mmilosevic-diplomski-api.com/docs/errors/validation");
+//        return new ResponseEntity<>(apiResponse, new HttpHeaders(), HttpStatus.BAD_REQUEST);
+//    }
 
     @ExceptionHandler(UsernameNotFoundException.class)
     public ResponseEntity<Map<String, List<String>>> handleNotFoundException(UsernameNotFoundException ex) {
