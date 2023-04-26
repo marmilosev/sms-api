@@ -8,14 +8,9 @@ import java.util.List;
 public interface MessageService {
 
 
-    default Message saveMessage (Message message){
-        Integer id = (int) Math.random();
-        return saveMessage(message);
-    }
+    Message saveMessage (Message message);
     List<Message> getAllMessages();
     Message getMessageById(int id);
-    String deleteMessage (int id);
+    void deleteMessage (int id);
     Message updateMessage(Message message);
-
-    Message findByUser(int id);
 }

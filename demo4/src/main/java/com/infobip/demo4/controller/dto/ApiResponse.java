@@ -22,12 +22,12 @@ public class ApiResponse {
 
     }
 
-    public ApiResponse(String code, String message, String docsURL, List<SmsResponseDetails> smsResponseDetails, String timestamp) {
+    public ApiResponse(String code, String message, String docsURL, List<SmsResponseDetails> smsResponseDetails) {
         this.code = code;
         this.message = message;
         this.docsURL = docsURL;
         this.smsResponseDetails = smsResponseDetails;
-        this.timestamp = timestamp;
+        //this.timestamp = timestamp;
     }
 
 }

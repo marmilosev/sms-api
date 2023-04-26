@@ -29,35 +29,12 @@ public class MessageController {
     private ModelMapper modelMapper;
     private ApiResponse apiResponse;
 
-    private MessageDto messageDto;
-
-    private MessageDto convertToDto(Message message){
-        messageDto = new MessageDto();
-        MessageDto messageDto = modelMapper.map(message, MessageDto.class);
-        messageDto.setSubmissionDate();
-    }
-
-    private Message convertToEntity(MessageDto messageDto) throws ParseException {
-        Message message = modelMapper.map(messageDto, Message.class);
-        message.setSubmissionDate()
-    }
-//    @PostMapping("/add")
-//    public ResponseEntity<ApiResponse> createMessage(@RequestBody @Valid Message message){
-//        apiResponse = new ApiResponse();
-//        messageService.saveMessage(message);
-//        apiResponse.setCode("1");
-//        apiResponse.setMessage("Message with id " + message.getIdMessage() + " successfully created.");
-//        apiResponse.setDocsURL("https://mmilosevic-diplomski-api.com/messages/v1/1");
-//        return ResponseEntity.status(HttpStatus.OK).body(apiResponse);
-//    }
     @PostMapping("/add")
-    public ResponseEntity<MessageDto> createMessage(@RequestBody MessageDto messageDto){
-//        Message messageRequest = modelMapper.map(messageDto, Message.class);
-//        Message message = messageService.saveMessage(messageRequest);
-//        MessageDto messageResponse = modelMapper.map(message, MessageDto.class);
-//        return new ResponseEntity<>(messageResponse, HttpStatus.CREATED);
-        Message message = convertToEntity(messageDto);
-        return convertToDto(messageService.saveMessage(message));
+    public ResponseEntity<MessageDto> createMessage(@RequestBody @Valid MessageDto messageDto){
+        Message messageRequest = modelMapper.map(messageDto, Message.class);
+        Message message = messageService.saveMessage(messageRequest);
+        MessageDto messageResponse = modelMapper.map(message, MessageDto.class);
+        return new ResponseEntity<MessageDto>(messageResponse, HttpStatus.CREATED);
     }
 
 
@@ -75,7 +52,7 @@ public class MessageController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<MessageDto> updateMessage(@PathVariable("id") int id, @RequestBody MessageDto messageDto){
+    public ResponseEntity<MessageDto> updateMessage(@PathVariable("id") int id, @RequestBody @Valid MessageDto messageDto){
         Message messageRequest = modelMapper.map(messageDto, Message.class);
         messageRequest.setIdMessage(id);
         Message message = messageService.updateMessage(messageRequest);
@@ -84,8 +61,12 @@ public class MessageController {
     }
 
     @DeleteMapping("/{id}")
-    public String deleteMessage(@PathVariable("id") int id){
-        return messageService.deleteMessage(id);
+    public ResponseEntity<ApiResponse> deleteMessage(@PathVariable("id") int id){
+        messageService.deleteMessage(id);
+        apiResponse.setCode("4");
+        apiResponse.setMessage("User with id " + id + "has been deleted successfully.");
+        apiResponse.setDocsURL("https://mmilosevic-diplomski-api.com/messages/v1/4");
+        return ResponseEntity.status(HttpStatus.OK).body(apiResponse);
     }
 
 

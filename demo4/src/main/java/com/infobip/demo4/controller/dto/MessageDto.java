@@ -18,10 +18,9 @@ import java.util.TimeZone;
 @Setter
 public class MessageDto {
 
-    private static final SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+//    private static final SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 
     private int idMessage;
-    @NotBlank(message = "validation.userIdMandatory")
     @NotNull(message = "validation.userIdMandatory")
     private int userId;
     @NotBlank(message = "validation.numberMsgMandatory")
@@ -34,15 +33,26 @@ public class MessageDto {
     @NotNull(message = "validation.messageTextMandatory")
     private String messageText;
 
-    public Date getSubmissionDateConverted(String timezone) throws ParseException{
-        dateFormat.setTimeZone(TimeZone.getTimeZone(timezone));
-        return dateFormat.parse(this.dateTime);
+    public MessageDto() {
     }
 
-    public void setSubmissionDate(Date date, String timezone){
-        dateFormat.setTimeZone(TimeZone.getTimeZone(timezone));
-        this.dateTime = dateFormat.format(date);
+    public MessageDto(int idMessage, int userId, String number, String dateTime, String messageText) {
+        this.idMessage = idMessage;
+        this.userId = userId;
+        this.number = number;
+        this.dateTime = dateTime;
+        this.messageText = messageText;
     }
+
+    //    public Date getSubmissionDateConverted(String timezone) throws ParseException{
+//        dateFormat.setTimeZone(TimeZone.getTimeZone(timezone));
+//        return dateFormat.parse(this.dateTime);
+//    }
+//
+//    public void setSubmissionDate(Date date, String timezone){
+//        dateFormat.setTimeZone(TimeZone.getTimeZone(timezone));
+//        this.dateTime = dateFormat.format(date);
+//    }
 
 
 }
