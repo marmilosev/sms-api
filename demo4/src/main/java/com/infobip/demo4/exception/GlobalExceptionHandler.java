@@ -1,6 +1,7 @@
 package com.infobip.demo4.exception;
 
 import com.infobip.demo4.controller.dto.ApiResponse;
+import org.hibernate.TransientPropertyValueException;
 import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.context.support.ResourceBundleMessageSource;
 import org.springframework.http.HttpHeaders;
@@ -66,6 +67,18 @@ public class GlobalExceptionHandler {
         List<String> errors = Collections.singletonList(ex.getMessage());
         return new ResponseEntity<>(getErrorsMap(errors), new HttpHeaders(), HttpStatus.INTERNAL_SERVER_ERROR);
     }
+
+    @ExceptionHandler(TransientPropertyValueException.class)
+    public final ResponseEntity<ApiResponse> handleTransientException(TransientPropertyValueException ex) {
+        ApiResponse apiResponse = new ApiResponse();
+        apiResponse.setCode("1");
+        apiResponse.setDocsURL("https://mmilosevic-diplomski-api.com/authenticate/v1/1");
+        apiResponse.setMessage("User id must be valid.");
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(apiResponse);
+    }
+
+
+
 
     private Map<String, List<String>> getErrorsMap(List<String> errors) {
         Map<String, List<String>> errorResponse = new HashMap<>();
