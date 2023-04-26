@@ -11,7 +11,13 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.Date;
 import java.util.List;
+import java.util.TimeZone;
 import java.util.stream.Collectors;
 
 @RequestMapping("/v1/users")
@@ -53,6 +59,9 @@ public class UserController {
         apiResponse.setCode("9");
         apiResponse.setMessage("User with username " + userDto.getUsername() + " successfully updated.");
         apiResponse.setDocsURL("https://mmilosevic-diplomski-api.com/users/v1/9");
+        DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+        df.setTimeZone(TimeZone.getTimeZone("UTC"));
+        apiResponse.setTimestamp(df.format(new Date()));
         return ResponseEntity.status(HttpStatus.OK).body(apiResponse);
     }
     @DeleteMapping("/{id}")

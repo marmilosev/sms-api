@@ -47,7 +47,7 @@ public class WebSecurityConfig {
                 csrf().disable()
                 // don't authenticate this particular request
                 // giving permission to every request for /authenticate endpoint
-                .authorizeRequests().requestMatchers("/authenticate").permitAll().
+                .authorizeRequests().requestMatchers("/v1/authenticate").permitAll().
                     requestMatchers("/v1/users/register").permitAll().
                 // all other requests need to be authenticated
                 // for everything else, the user has to be authenticated

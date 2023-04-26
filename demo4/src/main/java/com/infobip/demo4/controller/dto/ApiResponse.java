@@ -1,11 +1,13 @@
 package com.infobip.demo4.controller.dto;
 
 import com.infobip.model.SmsResponseDetails;
-import org.springframework.http.HttpStatus;
+import lombok.Getter;
+import lombok.Setter;
 
-import java.util.Date;
 import java.util.List;
 
+@Getter
+@Setter
 public class ApiResponse {
     private String code;
     private String message;
@@ -14,57 +16,18 @@ public class ApiResponse {
 
     private List<SmsResponseDetails> smsResponseDetails;
 
-    private Date date;
+    private String timestamp;
 
     public ApiResponse() {
 
     }
 
-    public ApiResponse(String code, String message, String docsURL, List<SmsResponseDetails> smsResponseDetails) {
+    public ApiResponse(String code, String message, String docsURL, List<SmsResponseDetails> smsResponseDetails, String timestamp) {
         this.code = code;
         this.message = message;
         this.docsURL = docsURL;
         this.smsResponseDetails = smsResponseDetails;
-//        this.date = date;
+        this.timestamp = timestamp;
     }
 
-    public String getCode() {
-        return code;
-    }
-
-    public void setCode(String code) {
-        this.code = code;
-    }
-
-    public Date getDate() {
-        return date;
-    }
-
-    public void setDate(Date date) {
-        this.date = date;
-    }
-
-    public String getMessage() {
-        return message;
-    }
-
-    public void setMessage(String message) {
-        this.message = message;
-    }
-
-    public String getDocsURL() {
-        return docsURL;
-    }
-
-    public void setDocsURL(String docsURL) {
-        this.docsURL = docsURL;
-    }
-
-    public List<SmsResponseDetails> getSmsResponseDetails() {
-        return smsResponseDetails;
-    }
-
-    public void setSmsResponseDetails(List<SmsResponseDetails> smsResponseDetails) {
-        this.smsResponseDetails = smsResponseDetails;
-    }
 }
