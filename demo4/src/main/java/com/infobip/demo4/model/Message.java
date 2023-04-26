@@ -13,7 +13,7 @@ public class Message{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int idMessage;
-    @ManyToOne(cascade = {CascadeType.ALL})
+    @ManyToOne(cascade = {CascadeType.MERGE})
     @JoinColumn
     private User user;
     private String number;

@@ -1,53 +1,39 @@
 package com.infobip.demo4.controller.dto;
 
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import lombok.Builder;
+import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 import org.springframework.stereotype.Component;
 
 @Component
+@Data
+@Builder
+@Getter
+@Setter
 public class SmsRequest {
-
-    private String mail;
+    @NotBlank(message = "validation.usernameSmsMandatory")
+    @NotNull(message = "validation.usernameSmsMandatory")
     private String username;
+    @NotBlank(message = "validation.passwordSmsMandatory")
+    @NotNull(message = "validation.passwordSmsMandatory")
     private String password;
+    @NotBlank(message = "validation.toNumberSmsMandatory")
+    @NotNull(message = "validation.toNumberSmsMandatory")
     private String toNumber;
+    @NotBlank(message = "validation.messageTextSmsMandatory")
+    @NotNull(message = "validation.messageTextSmsMandatory")
     private String messageText;
 
-    public String getMail() {
-        return mail;
+    public SmsRequest() {
     }
 
-    public void setMail(String mail) {
-        this.mail = mail;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public String getToNumber() {
-        return toNumber;
-    }
-
-    public void setToNumber(String toNumber) {
-        this.toNumber = toNumber;
-    }
-
-    public String getMessageText() {
-        return messageText;
-    }
-
-    public void setMessageText(String messageText) {
-        this.messageText = messageText;
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
+    public SmsRequest(String username, String password, String toNumber, String messageText) {
         this.username = username;
+        this.password = password;
+        this.toNumber = toNumber;
+        this.messageText = messageText;
     }
 }
