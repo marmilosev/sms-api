@@ -1,11 +1,13 @@
 package com.infobip.demo4.model;
 
 import jakarta.persistence.*;
+import lombok.Builder;
 
 import java.util.Date;
 
 @Entity
 @Table(name = "messages")
+//@Builder
 public class Message{
 
     @Id
@@ -17,6 +19,10 @@ public class Message{
     private String number;
     private Date dateTime;
     private String messageText;
+
+    public Message() {
+
+    }
 
     public int getIdMessage() {
         return idMessage;

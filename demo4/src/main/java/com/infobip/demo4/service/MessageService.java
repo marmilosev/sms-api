@@ -1,10 +1,12 @@
 package com.infobip.demo4.service;
 
+import com.infobip.demo4.controller.dto.MessageDto;
 import com.infobip.demo4.model.Message;
 
 import java.util.List;
 
 public interface MessageService {
+
 
     default Message saveMessage (Message message){
         Integer id = (int) Math.random();

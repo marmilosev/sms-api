@@ -1,51 +1,48 @@
 package com.infobip.demo4.controller.dto;
 
-import java.util.Date;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import lombok.Builder;
+import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.TimeZone;
+
+@Data
+@Builder
+@Getter
+@Setter
 public class MessageDto {
+
+    private static final SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+
     private int idMessage;
+    @NotBlank(message = "validation.userIdMandatory")
+    @NotNull(message = "validation.userIdMandatory")
     private int userId;
+    @NotBlank(message = "validation.numberMsgMandatory")
+    @NotNull(message = "validation.numberMsgMandatory")
     private String number;
-    private Date dateTime;
+    @NotBlank(message = "validation.dateTimeMandatory")
+    @NotNull(message = "validation.dateTimeMandatory")
+    private String dateTime;
+    @NotBlank(message = "validation.messageTextMandatory")
+    @NotNull(message = "validation.messageTextMandatory")
     private String messageText;
 
-    public int getIdMessage() {
-        return idMessage;
+    public Date getSubmissionDateConverted(String timezone) throws ParseException{
+        dateFormat.setTimeZone(TimeZone.getTimeZone(timezone));
+        return dateFormat.parse(this.dateTime);
     }
 
-    public void setIdMessage(int idMessage) {
-        this.idMessage = idMessage;
+    public void setSubmissionDate(Date date, String timezone){
+        dateFormat.setTimeZone(TimeZone.getTimeZone(timezone));
+        this.dateTime = dateFormat.format(date);
     }
 
-    public int getUserId() {
-        return userId;
-    }
 
-    public void setUserId(int userId) {
-        this.userId = userId;
-    }
-
-    public String getNumber() {
-        return number;
-    }
-
-    public void setNumber(String number) {
-        this.number = number;
-    }
-
-    public Date getDateTime() {
-        return dateTime;
-    }
-
-    public void setDateTime(Date dateTime) {
-        this.dateTime = dateTime;
-    }
-
-    public String getMessageText() {
-        return messageText;
-    }
-
-    public void setMessageText(String messageText) {
-        this.messageText = messageText;
-    }
 }

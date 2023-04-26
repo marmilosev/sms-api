@@ -1,5 +1,6 @@
 package com.infobip.demo4.service;
 
+import com.infobip.demo4.controller.dto.MessageDto;
 import com.infobip.demo4.model.Message;
 import com.infobip.demo4.repository.MessageRepository;
 import org.springframework.beans.factory.annotation.Autowired;

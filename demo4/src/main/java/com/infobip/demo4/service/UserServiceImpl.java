@@ -6,8 +6,8 @@ import com.infobip.demo4.model.User;
 import com.infobip.demo4.repository.UserRepository;
 import de.mkammerer.argon2.Argon2;
 import de.mkammerer.argon2.Argon2Factory;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -17,6 +17,7 @@ import java.util.Optional;
 public class UserServiceImpl implements UserService {
     @Autowired
     private UserRepository userRepository;
+    private ModelMapper modelMapper;
 
     @Override
     public User saveUser(UserDto userDto) {
