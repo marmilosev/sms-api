@@ -4,6 +4,7 @@ import com.infobip.demo4.config.JwtTokenUtil;
 import com.infobip.demo4.controller.dto.JwtRequest;
 import com.infobip.demo4.controller.dto.JwtResponse;
 import com.infobip.demo4.service.JwtUserDetailsService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -31,8 +32,8 @@ public class JwtAuthenticationController {
 //        return "Hello World";
 //    }
 
-    @PostMapping("/v1/authenticate")
-    public ResponseEntity<?> createAuthenticationToken(@RequestBody JwtRequest authenticationRequest) throws Exception{
+    @PostMapping("/authenticate/v1")
+    public ResponseEntity<?> createAuthenticationToken(@RequestBody @Valid JwtRequest authenticationRequest) throws Exception{
         //authenticate the user based on the provided credentials
         authenticate(authenticationRequest.getUsername(), authenticationRequest.getPassword());
 
@@ -51,6 +52,10 @@ public class JwtAuthenticationController {
             throw new Exception("USER_DISABLED", e);
         }catch (BadCredentialsException e){
             throw new Exception("INVALID_CREDENTIALS", e);
+        }
+
+        if(username.isEmpty()){
+
         }
     }
 }

@@ -7,7 +7,9 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.stereotype.Component;
 
+@Component
 @Data
 @Builder
 @Getter
@@ -33,4 +35,17 @@ public class UserDto {
     @NotBlank(message = "validation.numberMandatory")
     @NotNull(message = "validation.numberMandatory")
     private String number;
+
+    public UserDto() {
+    }
+
+    public UserDto(int idUser, String firstName, String lastName, String username, String mail, String password, String number) {
+        this.idUser = idUser;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.username = username;
+        this.mail = mail;
+        this.password = password;
+        this.number = number;
+    }
 }
