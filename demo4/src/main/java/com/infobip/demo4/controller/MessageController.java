@@ -30,11 +30,15 @@ public class MessageController {
     private ApiResponse apiResponse;
 
     @PostMapping("/add")
-    public ResponseEntity<MessageDto> createMessage(@RequestBody @Valid MessageDto messageDto){
+    public ResponseEntity<ApiResponse> createMessage(@RequestBody @Valid MessageDto messageDto){
+        apiResponse = new ApiResponse();
         Message messageRequest = modelMapper.map(messageDto, Message.class);
         Message message = messageService.saveMessage(messageRequest);
         MessageDto messageResponse = modelMapper.map(message, MessageDto.class);
-        return new ResponseEntity<MessageDto>(messageResponse, HttpStatus.CREATED);
+        apiResponse.setCode("5");
+        apiResponse.setMessage("Message created successfully.");
+        apiResponse.setDocsURL("https://mmilosevic-diplomski-api.com/messages/v1/4");
+        return ResponseEntity.status(HttpStatus.OK).body(apiResponse);
     }
 
 
@@ -62,10 +66,11 @@ public class MessageController {
 
     @DeleteMapping("/{id}")
     public ResponseEntity<ApiResponse> deleteMessage(@PathVariable("id") int id){
+        apiResponse = new ApiResponse();
         messageService.deleteMessage(id);
-        apiResponse.setCode("4");
-        apiResponse.setMessage("User with id " + id + "has been deleted successfully.");
-        apiResponse.setDocsURL("https://mmilosevic-diplomski-api.com/messages/v1/4");
+        apiResponse.setCode("7");
+        apiResponse.setMessage("User with id " + id + " has been deleted successfully.");
+        apiResponse.setDocsURL("https://mmilosevic-diplomski-api.com/messages/v1/7");
         return ResponseEntity.status(HttpStatus.OK).body(apiResponse);
     }
 
