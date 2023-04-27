@@ -15,8 +15,6 @@ import com.infobip.model.SmsAdvancedTextualRequest;
 import com.infobip.model.SmsDestination;
 import com.infobip.model.SmsResponse;
 import com.infobip.model.SmsTextualMessage;
-import de.mkammerer.argon2.Argon2;
-import de.mkammerer.argon2.Argon2Factory;
 import jakarta.annotation.PostConstruct;
 import jakarta.validation.Valid;
 import org.jetbrains.annotations.NotNull;
@@ -27,6 +25,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
+import java.sql.Timestamp;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -39,49 +40,54 @@ public class SmsController {
     private String apiKey;
     @Value("${infobip.baseUrl}")
     private String baseUrl;
-
     private ApiClient apiClient;
-
     private User user;
     private Message message;
     @Autowired
     private UserServiceImpl userService;
-
     @Autowired
     private MessageServiceImpl messageService;
-
     private ApiResponse apiResponse;
+    private final SimpleDateFormat date_format = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+    private final SimpleDateFormat  date_time_format = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 
+    private java.sql.Date parseDate(String date) {
+        try {
+            return (java.sql.Date) new Date(date_format.parse(date).getTime());
+        } catch (ParseException e) {
+            throw new IllegalArgumentException(e);
+        }
+    }
+    private java.sql.Timestamp parseTimestamp(String timestamp) {
+        try {
+            return new Timestamp(date_time_format.parse(timestamp).getTime());
+        } catch (ParseException e) {
+            throw new IllegalArgumentException(e);
+        }
+    }
     public SmsController() throws IOException {
     }
-
     @PostConstruct
     public void init() {
         this.apiClient = ApiClient.forApiKey(ApiKey.from(apiKey))
             .withBaseUrl(BaseUrl.from(baseUrl))
             .build();
     }
-
     //Send SMS when execute
     @PostMapping("/sendSMS")
     @ResponseBody
     public ResponseEntity<ApiResponse> sendSMS(@NotNull @RequestBody @Valid SmsRequest smsRequest) {
         apiResponse= new ApiResponse();
         user = userService.findByUsername(smsRequest.getUsername());
-
-
         SmsApi smsApi = new SmsApi(apiClient);
         SmsTextualMessage smsMessage = new SmsTextualMessage()
                 .from(user.getFirstName() + " " + user.getLastName())
                 .addDestinationsItem(new SmsDestination().to(smsRequest.getToNumber()))
                 .text(smsRequest.getMessageText());
 
-
         List<SmsTextualMessage> messages= new ArrayList<>();
         messages.add(smsMessage);
-
         SmsAdvancedTextualRequest smsMessageRequest = new SmsAdvancedTextualRequest()
-
                 .messages(messages);
         SmsResponse smsResponse=null;
         try {
@@ -98,7 +104,7 @@ public class SmsController {
             apiResponse.setMessage("Message sent");
             apiResponse.setSmsResponseDetails(smsResponse.getMessages());
             apiResponse.setDocsURL("https://mmilosevic-diplomski-api.com/sms/v1/5");
-
+            apiResponse.setTimestamp((Timestamp) new Date());
             return ResponseEntity.status(HttpStatus.OK).body(apiResponse);
         } catch (ApiException apiException) {
             apiException.printStackTrace();

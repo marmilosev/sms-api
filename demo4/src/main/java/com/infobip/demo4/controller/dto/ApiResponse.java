@@ -4,6 +4,7 @@ import com.infobip.model.SmsResponseDetails;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.sql.Timestamp;
 import java.util.List;
 
 @Getter
@@ -16,7 +17,7 @@ public class ApiResponse {
 
     private List<SmsResponseDetails> smsResponseDetails;
 
-    private String timestamp;
+    private Timestamp timestamp;
 
     public ApiResponse() {
 

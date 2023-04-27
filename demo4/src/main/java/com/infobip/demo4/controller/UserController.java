@@ -11,6 +11,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.sql.Timestamp;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.time.ZonedDateTime;
@@ -61,7 +62,7 @@ public class UserController {
         apiResponse.setDocsURL("https://mmilosevic-diplomski-api.com/users/v1/9");
         DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
         df.setTimeZone(TimeZone.getTimeZone("UTC"));
-        apiResponse.setTimestamp(df.format(new Date()));
+        apiResponse.setTimestamp((Timestamp) new Date());
         return ResponseEntity.status(HttpStatus.OK).body(apiResponse);
     }
     @DeleteMapping("/{id}")
