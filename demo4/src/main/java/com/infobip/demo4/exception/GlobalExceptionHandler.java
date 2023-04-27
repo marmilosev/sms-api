@@ -4,6 +4,8 @@ import com.infobip.demo4.controller.dto.ApiResponse;
 import org.hibernate.TransientPropertyValueException;
 import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.context.support.ResourceBundleMessageSource;
+import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.dao.InvalidDataAccessApiUsageException;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -13,6 +15,7 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
+import java.sql.SQLException;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
@@ -51,6 +54,7 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(UsernameNotFoundException.class)
     public ResponseEntity<Map<String, List<String>>> handleNotFoundException(UsernameNotFoundException ex) {
+//        List<String> errors = Collections.singletonList(ex.getClass().getName());
         List<String> errors = Collections.singletonList(ex.getMessage());
         return new ResponseEntity<>(getErrorsMap(errors), new HttpHeaders(), HttpStatus.NOT_FOUND);
     }
@@ -58,25 +62,37 @@ public class GlobalExceptionHandler {
     //throw invalid ID
     @ExceptionHandler(Exception.class)
     public final ResponseEntity<Map<String, List<String>>> handleGeneralExceptions(Exception ex) {
-        List<String> errors = Collections.singletonList(ex.getMessage());
+        List<String> errors = Collections.singletonList(ex.getClass().getName());
+//        List<String> errors = Collections.singletonList(ex.getMessage());
         return new ResponseEntity<>(getErrorsMap(errors), new HttpHeaders(), HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
     @ExceptionHandler(RuntimeException.class)
     public final ResponseEntity<Map<String, List<String>>> handleRuntimeExceptions(RuntimeException ex) {
         List<String> errors = Collections.singletonList(ex.getMessage());
+//        List<String> errors = Collections.singletonList(ex.getClass().getName());
         return new ResponseEntity<>(getErrorsMap(errors), new HttpHeaders(), HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
-    @ExceptionHandler(TransientPropertyValueException.class)
-    public final ResponseEntity<ApiResponse> handleTransientException(TransientPropertyValueException ex) {
+    @ExceptionHandler(InvalidDataAccessApiUsageException.class)
+    public final ResponseEntity<ApiResponse> handleInvalidDataAccessApiException(Exception ex) {
         ApiResponse apiResponse = new ApiResponse();
-        apiResponse.setCode("1");
-        apiResponse.setDocsURL("https://mmilosevic-diplomski-api.com/authenticate/v1/1");
+        apiResponse.setCode("5");
+        apiResponse.setDocsURL("https://mmilosevic-diplomski-api.com/sms/v1/5");
         apiResponse.setMessage("User id must be valid.");
+        // User id cannot be 0.
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(apiResponse);
     }
 
+    @ExceptionHandler(DataIntegrityViolationException.class)
+    public final ResponseEntity<ApiResponse> handleDataIntegrityViolationException(Exception ex) {
+        ApiResponse apiResponse = new ApiResponse();
+        apiResponse.setCode("6");
+        apiResponse.setDocsURL("https://mmilosevic-diplomski-api.com/authenticate/v1/6");
+        apiResponse.setMessage("User id must be valid.");
+        //User id not found in database. Please provide id that is stored in database.
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(apiResponse);
+    }
 
 
 
