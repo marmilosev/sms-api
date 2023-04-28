@@ -6,14 +6,14 @@ import com.infobip.demo4.model.User;
 import java.util.List;
 
 public interface UserService {
-    default User saveUser(UserDto userDto) {
+    default User saveUser(User userDto) {
         int id = (int) Math.random();
         return saveUser(userDto);
     }
     List<User> getAllUsers();
     User getUserById(int id);
-    String deleteUser(int id);
-    User updateUser(UserDto user);
+    void deleteUser(int id);
+    User updateUser(User user);
     User findByUsername(String username);
 }
 

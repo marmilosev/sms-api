@@ -14,8 +14,6 @@ import org.springframework.web.bind.annotation.*;
 import java.sql.Timestamp;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.time.ZonedDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.List;
 import java.util.TimeZone;
@@ -31,52 +29,68 @@ public class UserController {
     private ModelMapper modelMapper;
     ApiResponse apiResponse;
     @PostMapping("/add")
-    public ResponseEntity<ApiResponse> createUser(@RequestBody @Valid UserDto userDto) {
-        apiResponse = new ApiResponse();
-        userService.saveUser(userDto);
-        apiResponse.setCode("8");
-        apiResponse.setMessage("User with username " + userDto.getUsername() + " successfully created.");
-        apiResponse.setDocsURL("https://mmilosevic-diplomski-api.com/users/v1/8");
-        return ResponseEntity.status(HttpStatus.OK).body(apiResponse);
+    public ResponseEntity<UserDto> createUser(@RequestBody @Valid UserDto userDto) {
+        User userRequest = modelMapper.map(userDto, User.class);
+        User user = userService.saveUser(userRequest);
+        UserDto userResponse = modelMapper.map(user, UserDto.class);
+        return new ResponseEntity<UserDto>(userResponse, HttpStatus.CREATED);
+//        apiResponse = new ApiResponse();
+//        userService.saveUser(userDto);
+//        apiResponse.setCode("8");
+//        apiResponse.setMessage("User with username " + userDto.getUsername() + " successfully created.");
+//        apiResponse.setDocsURL("https://mmilosevic-diplomski-api.com/users/v1/8");
+//        return ResponseEntity.status(HttpStatus.OK).body(apiResponse);
     }
     @GetMapping
-    public List<User> getAllUsers(){
-        return userService.getAllUsers();
+    public List<UserDto> getAllUsers(){
+        return userService.getAllUsers().stream().map(user -> modelMapper.map(user, UserDto.class))
+                .collect(Collectors.toList());
     }
     @GetMapping("/{id}")
-    public ResponseEntity<User> getUserById(@PathVariable("id") int id){
-        User user = this.userService.getUserById(id);
-        if(user != null) {
-            return ResponseEntity.ok(user);
-        } else{
-            return ResponseEntity.notFound().build();
-        }
+    public ResponseEntity<UserDto> getUserById(@PathVariable("id") int id){
+        User user = userService.getUserById(id);
+        UserDto userResponse = modelMapper.map(user, UserDto.class);
+        return ResponseEntity.ok().body(userResponse);
+//        if(user != null) {
+//            return ResponseEntity.ok(user);
+//        } else{
+//            return ResponseEntity.notFound().build();
+//        }
     }
     @PutMapping("/{id}")
-    public ResponseEntity <ApiResponse> updateUser(@PathVariable("id") int id, @RequestBody @Valid UserDto userDto) {
-        apiResponse = new ApiResponse();
+    public ResponseEntity <UserDto> updateUser(@PathVariable("id") int id, @RequestBody @Valid UserDto userDto) {
         userDto.setIdUser(id);
-        userService.updateUser(userDto);
-        apiResponse.setCode("9");
-        apiResponse.setMessage("User with username " + userDto.getUsername() + " successfully updated.");
-        apiResponse.setDocsURL("https://mmilosevic-diplomski-api.com/users/v1/9");
-        DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
-        df.setTimeZone(TimeZone.getTimeZone("UTC"));
-        apiResponse.setTimestamp((Timestamp) new Date());
-        return ResponseEntity.status(HttpStatus.OK).body(apiResponse);
+        User userRequest = modelMapper.map(userDto, User.class);
+        User user = userService.updateUser(userRequest);
+        UserDto userResponse = modelMapper.map(user, UserDto.class);
+        return ResponseEntity.ok().body(userResponse);
+//        apiResponse = new ApiResponse();
+//        userDto.setIdUser(id);
+//        userService.updateUser(userDto);
+//        apiResponse.setCode("9");
+//        apiResponse.setMessage("User with username " + userDto.getUsername() + " successfully updated.");
+//        apiResponse.setDocsURL("https://mmilosevic-diplomski-api.com/users/v1/9");
+//        DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+//        df.setTimeZone(TimeZone.getTimeZone("UTC"));
+//        apiResponse.setTimestamp((Timestamp) new Date());
+//        return ResponseEntity.status(HttpStatus.OK).body(apiResponse);
     }
     @DeleteMapping("/{id}")
-    public ResponseEntity<Object> deleteUser(@PathVariable int id) {
-        return new ResponseEntity<>(userService.deleteUser(id), HttpStatus.OK);
-    }
-    @PostMapping("/register")
-    public ResponseEntity<ApiResponse> registerUser(@Valid @RequestBody UserDto userDto) {
+    public ResponseEntity<ApiResponse> deleteUser(@PathVariable int id) {
+        userService.deleteUser(id);
         apiResponse = new ApiResponse();
-        userService.saveUser(userDto);
-        apiResponse.setCode("10");
-        apiResponse.setMessage("User with username " + userDto.getUsername() + " successfully registered.");
-        apiResponse.setDocsURL("https://mmilosevic-diplomski-api.com/users/v1/10");
-        return ResponseEntity.status(HttpStatus.OK).body(apiResponse);
+        apiResponse.setMessage("Deleted");
+        return new ResponseEntity<ApiResponse>(apiResponse, HttpStatus.OK);
+//        return new ResponseEntity<>(userService.deleteUser(id), HttpStatus.OK);
     }
+//    @PostMapping("/register")
+//    public ResponseEntity<ApiResponse> registerUser(@Valid @RequestBody UserDto userDto) {
+//        apiResponse = new ApiResponse();
+//        userService.saveUser(userDto);
+//        apiResponse.setCode("10");
+//        apiResponse.setMessage("User with username " + userDto.getUsername() + " successfully registered.");
+//        apiResponse.setDocsURL("https://mmilosevic-diplomski-api.com/users/v1/10");
+//        return ResponseEntity.status(HttpStatus.OK).body(apiResponse);
+//    }
 
 }

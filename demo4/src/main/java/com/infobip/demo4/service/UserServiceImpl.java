@@ -17,20 +17,18 @@ import java.util.Optional;
 public class UserServiceImpl implements UserService {
     @Autowired
     private UserRepository userRepository;
-    private ModelMapper modelMapper;
-
     @Override
-    public User saveUser(UserDto userDto) {
+    public User saveUser(User user) {
         Argon2 argon2 = Argon2Factory.create(Argon2Factory.Argon2Types.ARGON2i);
         //iteration, memory, parallelism
-        String hashPassword = argon2.hash(2, 1024, 4, userDto.getPassword());
-        User user = User.builder()
-                .idUser(userDto.getIdUser())
-                .firstName(userDto.getFirstName())
-                .lastName(userDto.getLastName())
-                .username(userDto.getUsername())
-                .mail(userDto.getMail())
-                .number(userDto.getNumber())
+        String hashPassword = argon2.hash(2, 1024, 4, user.getPassword());
+        user = User.builder()
+                .idUser(user.getIdUser())
+                .firstName(user.getFirstName())
+                .lastName(user.getLastName())
+                .username(user.getUsername())
+                .mail(user.getMail())
+                .number(user.getNumber())
                 .password(hashPassword)
                 .build();
 
@@ -49,18 +47,17 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public String deleteUser(int id) {
+    public void deleteUser(int id) {
         Optional<User> optionalUser = userRepository.findById(id);
         if (optionalUser.isPresent()) {
             userRepository.deleteById(id);
-            return "User with id " + id + " has been deleted.";
         } else {
             throw new UserNotFoundException("User with id " + id + " has not been found.");
         }
     }
 
     @Override
-    public User updateUser(UserDto user) {
+    public User updateUser(User user) {
         Optional<User> existingUserOptional = userRepository.findById(user.getIdUser());
         if(existingUserOptional.isPresent()) {
             Argon2 argon2 = Argon2Factory.create(Argon2Factory.Argon2Types.ARGON2i);
