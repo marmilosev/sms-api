@@ -6,9 +6,9 @@ import com.infobip.demo4.model.User;
 import java.util.List;
 
 public interface UserService {
-    default User saveUser(User userDto) {
+    default User saveUser(User user){
         int id = (int) Math.random();
-        return saveUser(userDto);
+        return saveUser(user);
     }
     List<User> getAllUsers();
     User getUserById(int id);
