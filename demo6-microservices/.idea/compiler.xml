@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile default="true" name="Default" enabled="true" />
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="authenticationService" />
+        <module name="userManagementService" />
+        <module name="eurekaServer" />
+        <module name="sendMessageService" />
+        <module name="springGatewaySecurity" />
+      </profile>
+    </annotationProcessing>
+  </component>
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="authenticationService" options="-parameters" />
+      <module name="eurekaServer" options="-parameters" />
+      <module name="sendMessageService" options="-parameters" />
+      <module name="springGatewaySecurity" options="-parameters" />
+      <module name="userManagementService" options="-parameters" />
+    </option>
+  </component>
+</project>
