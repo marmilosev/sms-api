@@ -1,8 +1,8 @@
-package com.infobip.authenticationService.old.service;
+package com.infobip.sendMessageService.service;
 
-import com.infobip.authenticationService.old.exception.UserNotFoundException;
-import com.infobip.authenticationService.old.model.User;
-import com.infobip.authenticationService.old.repository.UserRepository;
+import com.infobip.sendMessageService.exception.UserNotFoundException;
+import com.infobip.sendMessageService.model.User;
+import com.infobip.sendMessageService.repository.UserRepository;
 import de.mkammerer.argon2.Argon2;
 import de.mkammerer.argon2.Argon2Factory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class UserServiceImpl implements UserService{
+public class UserServiceImpl implements UserService {
     @Autowired
     private UserRepository userRepository;
     @Override

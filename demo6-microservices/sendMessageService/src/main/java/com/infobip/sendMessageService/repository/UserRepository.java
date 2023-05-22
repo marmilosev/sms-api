@@ -1,6 +1,6 @@
-package com.infobip.authenticationService.old.repository;
+package com.infobip.sendMessageService.repository;
 
-import com.infobip.authenticationService.old.model.User;
+import com.infobip.sendMessageService.model.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;

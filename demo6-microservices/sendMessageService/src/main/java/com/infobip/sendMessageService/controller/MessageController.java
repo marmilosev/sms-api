@@ -7,6 +7,7 @@ import com.infobip.sendMessageService.controller.dto.UserDto;
 import com.infobip.sendMessageService.model.Message;
 import com.infobip.sendMessageService.model.User;
 import com.infobip.sendMessageService.service.MessageService;
+import com.infobip.sendMessageService.service.UserService;
 import jakarta.validation.Valid;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +16,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.reactive.function.client.WebClient;
 
+import java.text.ParseException;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 @RequestMapping("/v1/messages")
@@ -24,6 +27,9 @@ public class MessageController {
 
     @Autowired
     private MessageService messageService;
+
+    @Autowired
+    private UserService userService;
 
     @Autowired
     private ModelMapper modelMapper;
@@ -85,12 +91,34 @@ public class MessageController {
 
 
     @PutMapping("/{id}")
-    public ResponseEntity<MessageDto> updateMessage(@PathVariable("id") int id, @RequestBody @Valid MessageDto messageDto){
+    public ResponseEntity<MessageDto> updateMessage(@PathVariable("id") int id, @RequestBody @Valid MessageDto messageDto) {
         Message messageRequest = modelMapper.map(messageDto, Message.class);
         messageRequest.setIdMessage(id);
+        user = userService.getUserById(messageDto.getUserId());
+        messageRequest.setUser(user);
         Message message = messageService.updateMessage(messageRequest);
         MessageDto messageResponse = modelMapper.map(message, MessageDto.class);
         return ResponseEntity.ok().body(messageResponse);
+
+//        if(!Objects.equals(id, messageDto.getIdMessage())){
+//            throw new IllegalArgumentException("IDs don't match");
+//        }
+//        message = convertToEntity(messageDto);
+//        messageService.updateMessage(message);
+//        return ResponseEntity.ok().body(messageDto);
+
+    }
+
+    private Message convertToEntity(MessageDto messageDto) {
+        message = modelMapper.map(messageDto, Message.class);
+        if(messageDto.getIdMessage() != 0){
+            Message oldMessage = messageService.getMessageById(messageDto.getIdMessage());
+            message.setMessageText(oldMessage.getMessageText());
+            message.setDateTime(oldMessage.getDateTime());
+            message.setNumber(oldMessage.getNumber());
+            message.setUser(oldMessage.getUser());
+        }
+        return message;
     }
 
     @DeleteMapping("/{id}")

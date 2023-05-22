@@ -101,6 +101,7 @@ public class SmsController {
         }
 
         SmsApi smsApi = new SmsApi(apiClient);
+        user = new UserDto();
         SmsTextualMessage smsMessage = new SmsTextualMessage()
                 .from(user.getFirstName() + " " + user.getLastName())
                 .addDestinationsItem(new SmsDestination().to(smsRequest.getToNumber()))

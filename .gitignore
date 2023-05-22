@@ -1,5 +1,5 @@
 # Ignore .idea directory 
-.idea/
+demo6-microservices/.idea
 
 # Ignore application.properties
 demo6-microservices/sendMessageService/src/main/resources/application.properties

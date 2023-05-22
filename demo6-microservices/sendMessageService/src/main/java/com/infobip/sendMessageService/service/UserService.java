@@ -1,6 +1,6 @@
-package com.infobip.authenticationService.old.service;
+package com.infobip.sendMessageService.service;
 
-import com.infobip.authenticationService.old.model.User;
+import com.infobip.sendMessageService.model.User;
 
 import java.util.List;
 
