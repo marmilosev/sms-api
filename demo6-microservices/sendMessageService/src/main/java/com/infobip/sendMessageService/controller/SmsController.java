@@ -15,10 +15,13 @@ import com.infobip.sendMessageService.controller.dto.AuthDto;
 import com.infobip.sendMessageService.controller.dto.SmsRequest;
 import com.infobip.sendMessageService.controller.dto.UserDto;
 import com.infobip.sendMessageService.model.Message;
+import com.infobip.sendMessageService.model.User;
 import com.infobip.sendMessageService.service.MessageServiceImpl;
+import com.infobip.sendMessageService.service.UserService;
 import jakarta.annotation.PostConstruct;
 import jakarta.validation.Valid;
 import org.jetbrains.annotations.NotNull;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
@@ -44,12 +47,15 @@ public class SmsController {
     @Value("${infobip.baseUrl}")
     private String baseUrl;
     private ApiClient apiClient;
-    private UserDto user;
+    private User user;
+    private UserDto userDto;
     private Message message;
-    //@Autowired
-    //private UserServiceImpl userService;
+    @Autowired
+    private UserService userService;
     @Autowired
     private MessageServiceImpl messageService;
+    @Autowired
+    private ModelMapper modelMapper;
     private ApiResponse apiResponse;
 //    private final SimpleDateFormat date_format = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 //    private final SimpleDateFormat  date_time_format = new SimpleDateFormat("yyyy-MM-dd HH:mm");
@@ -101,9 +107,19 @@ public class SmsController {
         }
 
         SmsApi smsApi = new SmsApi(apiClient);
-        user = new UserDto();
+        userDto = new UserDto();
+        userDto.setUsername(smsRequest.getUsername());
+        userDto.setPassword(smsRequest.getPassword());
+        User userRequest = modelMapper.map(userDto, User.class);
+        User user = userService.saveUser(userRequest);
+        UserDto userResponse = modelMapper.map(user, UserDto.class);
+
+        // Populate userDto with user information
+//        userDto.setFirstName(user.getFirstName());
+//        userDto.setLastName(user.getLastName());
+
         SmsTextualMessage smsMessage = new SmsTextualMessage()
-                .from(user.getFirstName() + " " + user.getLastName())
+                .from(userResponse.getFirstName() + " " + userResponse.getLastName())
                 .addDestinationsItem(new SmsDestination().to(smsRequest.getToNumber()))
                 .text(smsRequest.getMessageText());
 
