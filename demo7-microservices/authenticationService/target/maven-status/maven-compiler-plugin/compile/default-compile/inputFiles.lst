@@ -1,0 +1,15 @@
+/home/marija/Documents/GitHub/Infobip-WhatsApp-API/demo7-microservices/authenticationService/src/main/java/com/infobip/authenticationservice/config/jwt/JwtAuthenticationEntryPoint.java
+/home/marija/Documents/GitHub/Infobip-WhatsApp-API/demo7-microservices/authenticationService/src/main/java/com/infobip/authenticationservice/controller/dto/JwtRequest.java
+/home/marija/Documents/GitHub/Infobip-WhatsApp-API/demo7-microservices/authenticationService/src/main/java/com/infobip/authenticationservice/config/WebSecurityConfig.java
+/home/marija/Documents/GitHub/Infobip-WhatsApp-API/demo7-microservices/authenticationService/src/main/java/com/infobip/authenticationservice/service/JwtUserDetailsService.java
+/home/marija/Documents/GitHub/Infobip-WhatsApp-API/demo7-microservices/authenticationService/src/main/java/com/infobip/authenticationservice/AuthenticationServiceApplication.java
+/home/marija/Documents/GitHub/Infobip-WhatsApp-API/demo7-microservices/authenticationService/src/main/java/com/infobip/authenticationservice/config/EncoderConfig.java
+/home/marija/Documents/GitHub/Infobip-WhatsApp-API/demo7-microservices/authenticationService/src/main/java/com/infobip/authenticationservice/repository/UserRepository.java
+/home/marija/Documents/GitHub/Infobip-WhatsApp-API/demo7-microservices/authenticationService/src/main/java/com/infobip/authenticationservice/service/UserService.java
+/home/marija/Documents/GitHub/Infobip-WhatsApp-API/demo7-microservices/authenticationService/src/main/java/com/infobip/authenticationservice/model/User.java
+/home/marija/Documents/GitHub/Infobip-WhatsApp-API/demo7-microservices/authenticationService/src/main/java/com/infobip/authenticationservice/controller/JwtAuthenticationController.java
+/home/marija/Documents/GitHub/Infobip-WhatsApp-API/demo7-microservices/authenticationService/src/main/java/com/infobip/authenticationservice/controller/dto/MyUserPrinciple.java
+/home/marija/Documents/GitHub/Infobip-WhatsApp-API/demo7-microservices/authenticationService/src/main/java/com/infobip/authenticationservice/controller/dto/JwtResponse.java
+/home/marija/Documents/GitHub/Infobip-WhatsApp-API/demo7-microservices/authenticationService/src/main/java/com/infobip/authenticationservice/config/jwt/JwtRequestFilter.java
+/home/marija/Documents/GitHub/Infobip-WhatsApp-API/demo7-microservices/authenticationService/src/main/java/com/infobip/authenticationservice/service/UserServiceImpl.java
+/home/marija/Documents/GitHub/Infobip-WhatsApp-API/demo7-microservices/authenticationService/src/main/java/com/infobip/authenticationservice/config/jwt/JwtTokenUtil.java
