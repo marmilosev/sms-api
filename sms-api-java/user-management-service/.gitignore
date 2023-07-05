@@ -32,4 +32,4 @@ build/
 ### VS Code ###
 .vscode/
 
-sms-api-java/user-management-service/.idea
+.idea/
