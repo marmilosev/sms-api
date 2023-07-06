@@ -1,6 +1,5 @@
 package com.ffos.sendmessageservice.controller.dto;
 
-import com.infobip.model.SmsResponseDetails;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -15,20 +14,17 @@ public class ApiResponse {
 
     private String docsURL;
 
-    private List<SmsResponseDetails> smsResponseDetails;
-
-    private Timestamp timestamp;
+//    private List<SmsResponseDetails> smsResponseDetails;
 
     public ApiResponse() {
 
     }
 
-    public ApiResponse(String code, String message, String docsURL, List<SmsResponseDetails> smsResponseDetails) {
+    public ApiResponse(String code, String message, String docsURL) {
         this.code = code;
         this.message = message;
         this.docsURL = docsURL;
-        this.smsResponseDetails = smsResponseDetails;
-        //this.timestamp = timestamp;
+//        this.smsResponseDetails = smsResponseDetails;
     }
 
 }
