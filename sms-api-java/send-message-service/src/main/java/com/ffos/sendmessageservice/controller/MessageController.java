@@ -88,19 +88,6 @@ public class MessageController {
         return ResponseEntity.ok().body(messageDto);
     }
 
-//    @PutMapping("/{id}")
-//    public ResponseEntity<ApiResponse> updateMessage(@PathVariable("id") int id, @RequestBody MessageDto messageDto) {
-//        Message messageRequest = modelMapper.map(messageDto, Message.class);
-//        messageRequest.setIdMessage(id);
-//        Message message = messageService.updateMessage(messageRequest);
-//        MessageDto messageResponse = modelMapper.map(message, MessageDto.class);
-//        apiResponse = new ApiResponse();
-//        apiResponse.setCode("6");
-//        apiResponse.setMessage("Message updated successfully.");
-//        apiResponse.setDocsURL("https://mmilosevic-diplomski-api.com/messages/v1/6");
-//        return ResponseEntity.status(HttpStatus.OK).body(apiResponse);
-//    }
-
     @PutMapping("/{id}")
     public ResponseEntity<ApiResponse> updateMessage(@PathVariable("id") int id, @RequestBody MessageDto messageDto) {
         // Fetch user details from user service based on user ID
