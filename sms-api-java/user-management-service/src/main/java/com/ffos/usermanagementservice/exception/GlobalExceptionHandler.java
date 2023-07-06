@@ -1,5 +1,6 @@
 package com.ffos.usermanagementservice.exception;
 
+import com.ffos.usermanagementservice.controller.dto.ApiResponse;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
