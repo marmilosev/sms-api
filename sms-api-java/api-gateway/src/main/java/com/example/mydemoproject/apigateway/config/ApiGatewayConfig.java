@@ -19,7 +19,7 @@ public class ApiGatewayConfig {
         return builder.routes()
                 .route("user-service", r -> r.path("/v1/users/**")
                         .filters(f -> f.filter(filter))
-                        .uri("lb://user-service"))
+                        .uri("lb://user-management-service"))
 
                 .route("auth-service", r -> r.path("/api/auth/**")
                         .filters(f -> f.filter(filter))
