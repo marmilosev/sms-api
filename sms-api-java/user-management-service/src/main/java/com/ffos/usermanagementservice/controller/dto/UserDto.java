@@ -39,7 +39,7 @@ public class UserDto {
     public UserDto() {
     }
 
-    public UserDto(int idUser, String firstName, String lastName, String username, String mail, String password, String number) {
+    public UserDto(long idUser, String firstName, String lastName, String username, String mail, String password, String number) {
         this.idUser = idUser;
         this.firstName = firstName;
         this.lastName = lastName;

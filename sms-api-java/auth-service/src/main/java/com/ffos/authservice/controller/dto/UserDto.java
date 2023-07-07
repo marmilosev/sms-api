@@ -8,7 +8,6 @@ import org.springframework.stereotype.Component;
 
 @Component
 @Data
-@Builder
 @Getter
 @Setter
 public class UserDto {
