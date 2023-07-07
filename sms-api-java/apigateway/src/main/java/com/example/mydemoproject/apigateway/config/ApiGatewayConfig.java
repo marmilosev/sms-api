@@ -22,6 +22,9 @@ public class ApiGatewayConfig {
                 .route("UserServiceApplication", r -> r.path("/v1/users/**")
                         .filters(f -> f.filter(filter))
                         .uri("lb://user-service"))
+                .route("SendmessageApplication", r -> r.path("/v1/sms/sendSMS/**")
+                        .filters(f -> f.filter(filter))
+                        .uri("lb://send-message-service"))
 
                 .route("AuthenticationServiceApplication", r -> r.path("/api/auth/**")
                         .filters(f -> f.filter(filter))
