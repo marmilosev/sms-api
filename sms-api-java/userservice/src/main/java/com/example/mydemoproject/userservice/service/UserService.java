@@ -1,11 +1,18 @@
 package com.example.mydemoproject.userservice.service;
 
-import com.example.mydemoproject.userservice.dto.UserDto;
 import com.example.mydemoproject.userservice.model.User;
 
-public interface UserService {
-    User saveUser(User user);
-    UserDto getUser(Long userId);
+import java.util.List;
 
-//    UserDto findUserByEmail(String email);
+public interface UserService {
+
+    default User saveUser(User user) {
+        long id = (long) Math.random();
+        return saveUser(user);
+    }
+    List<User> getAllUsers();
+    User getUserById(long id);
+    void deleteUser(long id);
+    User updateUser(User user);
+    User findByUsername(String username);
 }

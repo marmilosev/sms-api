@@ -1,24 +1,37 @@
 package com.example.mydemoproject.userservice.model;
 
-
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
 @Table(name = "users")
-@Setter
+@Builder
 @Getter
-@AllArgsConstructor
-@NoArgsConstructor
+@Setter
 public class User {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private long idUser;
     private String firstName;
     private String lastName;
-    @Column(nullable = false, unique = true)
-    private String email;
+    private String username;
+    private String mail;
+    private String password;
+    private String number;
+
+    public User() {
+    }
+
+    public User(long idUser, String firstName, String lastName, String username, String mail, String password, String number) {
+        this.idUser = idUser;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.username = username;
+        this.mail = mail;
+        this.password = password;
+        this.number = number;
+    }
 }
