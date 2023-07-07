@@ -19,7 +19,7 @@ public class ApiGatewayConfig {
     @Bean
     public RouteLocator routes(RouteLocatorBuilder builder) {
         return builder.routes()
-                .route("user-service", r -> r.path("/api/users/**")
+                .route("user-service", r -> r.path("/v1/users/**")
                         .filters(f -> f.filter(filter))
                         .uri("lb://user-service"))
 
