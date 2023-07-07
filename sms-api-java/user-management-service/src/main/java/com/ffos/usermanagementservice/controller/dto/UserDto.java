@@ -15,7 +15,7 @@ import org.springframework.stereotype.Component;
 @Getter
 @Setter
 public class UserDto {
-    private int idUser;
+    private long idUser;
     @NotBlank(message = "validation.firstNameMandatory")
     @NotNull(message = "validation.firstNameMandatory")
     private String firstName;
