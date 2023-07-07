@@ -1,4 +1,4 @@
-package com.ffos.discoveryservice;
+package com.example.mydemoproject.discoveryservice;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
