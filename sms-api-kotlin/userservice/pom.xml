@@ -71,6 +71,7 @@
 				<groupId>org.jetbrains.kotlin</groupId>
 				<artifactId>kotlin-maven-plugin</artifactId>
 				<configuration>
+					<jvmTarget>17</jvmTarget>
 					<args>
 						<arg>-Xjsr305=strict</arg>
 					</args>
@@ -83,12 +84,12 @@
 					<dependency>
 						<groupId>org.jetbrains.kotlin</groupId>
 						<artifactId>kotlin-maven-allopen</artifactId>
-						<version>${kotlin.version}</version>
+						<version>1.9.0</version>
 					</dependency>
 					<dependency>
 						<groupId>org.jetbrains.kotlin</groupId>
 						<artifactId>kotlin-maven-noarg</artifactId>
-						<version>${kotlin.version}</version>
+						<version>1.9.0</version>
 					</dependency>
 				</dependencies>
 			</plugin>
