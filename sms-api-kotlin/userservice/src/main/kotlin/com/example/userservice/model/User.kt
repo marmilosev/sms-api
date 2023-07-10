@@ -3,15 +3,15 @@ package com.example.userservice.model
 import jakarta.persistence.*
 
 @Entity
-@Table(name="users")
-class User {
+@Table(name = "users")
+class User (
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private var idUser: Long = 0
-    private var firstName: String? = null
-    private var lastName: String? = null
-    private var username: String? = null
-    private var mail: String? = null
-    private var password: String? = null
-    private var number: String? = null
-}
+    var idUser: Long,
+    var firstName: String,
+    var lastName: String,
+    var username: String,
+    var mail: String,
+    var password: String,
+    var number: String
+)
