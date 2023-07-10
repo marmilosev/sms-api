@@ -1,72 +1,68 @@
-//package com.example.userservice.controller
-//
-//import com.example.userservice.controller.dto.ApiResponse
-//import com.example.userservice.controller.dto.UserDto
-//import com.example.userservice.model.User
-//import com.example.userservice.service.UserService
-//import org.springframework.beans.factory.annotation.Autowired
-//import org.springframework.http.HttpStatus
-//import org.springframework.http.ResponseEntity
-//import org.springframework.web.bind.annotation.*
-//import java.util.stream.Collectors
-//
-//
-//@RequestMapping("/v1/users")
-//@RestController
-//class UserController {
-//    @Autowired
-//    private val userService: UserService? = null
-//
-//    @Autowired
-//    private val modelMapper: ModelMapper? = null
-//    var apiResponse: ApiResponse? = null
-//    @PostMapping("/add")
-//    fun createUser(@RequestBody userDto: UserDto): ResponseEntity<ApiResponse> {
-//        val userRequest: User = modelMapper.map(userDto, User::class.java)
-//        val user: User = userService.saveUser(userRequest)
-//        val userResponse: UserDto = modelMapper.map(user, UserDto::class.java)
-//        apiResponse = ApiResponse()
-//        apiResponse!!.code("8")
-//        apiResponse.setMessage("User with username " + userDto.getUsername() + " successfully created.")
-//        apiResponse.setDocsURL("https://mmilosevic-diplomski-api.com/users/v1/8")
-//        return ResponseEntity.status(HttpStatus.OK).body<ApiResponse>(apiResponse)
-//    }
-//
-//    @get:GetMapping
-//    val allUsers: List<Any>
-//        get() = userService.getAllUsers().stream().map { user -> modelMapper.map(user, UserDto::class.java) }
-//            .collect(Collectors.toList())
-//
-//    @GetMapping("/{id}")
-//    fun getUserById(@PathVariable("id") id: Int): ResponseEntity<UserDto> {
-//        val user: User = userService.getUserById(id)
-//        val userResponse: UserDto = modelMapper.map(user, UserDto::class.java)
-//        return ResponseEntity.ok().body<UserDto>(userResponse)
-//    }
-//
-//    @PutMapping("/{id}")
-//    fun updateUser(@PathVariable("id") id: Int, @RequestBody @Valid userDto: UserDto): ResponseEntity<ApiResponse> {
-//        userDto.setIdUser(id)
-//        val userRequest: User = modelMapper.map(userDto, User::class.java)
-//        val user: User = userService.updateUser(userRequest)
-//        //        return ResponseEntity.ok().body(userResponse);
-//        apiResponse = ApiResponse()
-//        userDto.setIdUser(id)
-//        userService.updateUser(user)
-//        val userResponse: UserDto = modelMapper.map(user, UserDto::class.java)
-//        apiResponse.setCode("9")
-//        apiResponse.setMessage("User with username " + userDto.getUsername() + " successfully updated.")
-//        apiResponse.setDocsURL("https://mmilosevic-diplomski-api.com/users/v1/9")
-//        return ResponseEntity.status(HttpStatus.OK).body<ApiResponse>(apiResponse)
-//    }
-//
-//    @DeleteMapping("/{id}")
-//    fun deleteUser(@PathVariable id: Int): ResponseEntity<ApiResponse> {
-//        userService.deleteUser(id)
-//        apiResponse = ApiResponse()
-//        apiResponse.setCode("11")
-//        apiResponse.setMessage("User successfully deleted.")
-//        apiResponse.setDocsURL("https://mmilosevic-diplomski-api.com/users/v1/11")
-//        return ResponseEntity.status(HttpStatus.OK).body<ApiResponse>(apiResponse)
-//    }
-//}
+package com.example.userservice.controller
+
+import com.example.userservice.controller.dto.ApiResponse
+import com.example.userservice.controller.dto.UserDto
+import com.example.userservice.model.User
+import com.example.userservice.model.toUserDto
+import com.example.userservice.service.UserServiceImpl
+import org.springframework.http.HttpStatus
+import org.springframework.http.ResponseEntity
+import org.springframework.web.bind.annotation.*
+import java.util.stream.Collectors
+
+
+@RestController
+@RequestMapping("v1/users")
+class UserController (val userServiceImpl: UserServiceImpl){
+
+    var apiResponse: ApiResponse? = null
+
+    @GetMapping
+    fun getAllUsers() : List<UserDto>{
+        var users = userServiceImpl.getAllUsers()
+        return users.map { it.toUserDto() }
+    }
+
+    @GetMapping("/{id}")
+    fun getUser(@PathVariable id: Long): ResponseEntity<UserDto>{
+        var user = userServiceImpl.getUserById(id)
+        var userDto = user.toUserDto()
+        return ResponseEntity.ok().body(userDto)
+    }
+
+    @PostMapping("/add")
+    fun saveUser(@RequestBody user: User) : ResponseEntity<ApiResponse> {
+        var savedUser = userServiceImpl.saveUser(user)
+        savedUser.toUserDto()
+        apiResponse = ApiResponse(
+            "8",
+            "User with username ${savedUser.username} successfully created.",
+            "https://mmilosevic-diplomski-api.com/users/v1/8"
+        )
+        return ResponseEntity.status(HttpStatus.OK).body(apiResponse)
+    }
+
+    @DeleteMapping("/{id}")
+//    @ResponseStatus(HttpStatus.OK)
+    fun deleteUser(@PathVariable id: Long) : ResponseEntity<ApiResponse>{
+        userServiceImpl.deleteUser(id)
+        apiResponse = ApiResponse(
+            "11",
+            "Deleted",
+            "https://mmilosevic-diplomski-api.com/users/v1/11"
+        )
+        return ResponseEntity.status(HttpStatus.OK).body(apiResponse)
+    }
+
+    @PutMapping("/{idUser}")
+    fun updateUser(@PathVariable idUser: Long, @RequestBody user: User): ResponseEntity<ApiResponse> {
+        var updatedUser = userServiceImpl.updateUser(idUser, user)
+        updatedUser.toUserDto()
+        apiResponse = ApiResponse(
+            "9",
+            "User with username ${updatedUser.username} successfully updated.",
+            "https://mmilosevic-diplomski-api.com/users/v1/9"
+        )
+        return ResponseEntity.status(HttpStatus.OK).body(apiResponse)
+    }
+}

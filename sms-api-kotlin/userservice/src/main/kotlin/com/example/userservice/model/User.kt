@@ -1,5 +1,6 @@
 package com.example.userservice.model
 
+import com.example.userservice.controller.dto.UserDto
 import jakarta.persistence.*
 
 @Entity
@@ -14,4 +15,14 @@ class User (
     var mail: String,
     var password: String,
     var number: String
+)
+
+fun User.toUserDto() = UserDto(
+    idUser = idUser,
+    firstName = firstName,
+    lastName = lastName,
+    username = username,
+    mail = mail,
+    password = password,
+    number = number
 )

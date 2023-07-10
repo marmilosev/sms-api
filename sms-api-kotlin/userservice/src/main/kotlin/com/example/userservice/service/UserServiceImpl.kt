@@ -18,7 +18,9 @@ class UserServiceImpl (private val userRepository: UserRepository) : UserService
 
     val argon2 : Argon2 = Argon2Factory.create(Argon2Factory.Argon2Types.ARGON2i)
 
-    override val getAllUsers: List<User> = userRepository.findAll()
+    override fun getAllUsers(): List<User> {
+        return userRepository.findAll()
+    }
 
     override fun getUserById(id: Long): User = userRepository.findByIdOrNull(id) ?:
     throw ResponseStatusException(HttpStatus.NOT_FOUND)
@@ -36,6 +38,9 @@ class UserServiceImpl (private val userRepository: UserRepository) : UserService
         )
         return userRepository.save(userHashedPassword)
     }
+
+
+
 
     override fun deleteUser(id: Long) {
         if(userRepository.existsById(id)) userRepository.deleteById(id)

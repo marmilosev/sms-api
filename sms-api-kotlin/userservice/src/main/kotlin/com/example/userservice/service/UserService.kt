@@ -9,7 +9,7 @@ interface UserService {
         return saveUser(user)
     }
 
-    val getAllUsers: List<User>
+    fun getAllUsers(): List<User>
 
     fun getUserById(id: Long): User
     fun deleteUser(id: Long)
