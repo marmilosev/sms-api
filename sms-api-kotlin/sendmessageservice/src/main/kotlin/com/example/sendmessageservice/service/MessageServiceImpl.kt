@@ -4,8 +4,9 @@ import com.example.sendmessageservice.model.Message
 import com.example.sendmessageservice.repository.MessageRepository
 import org.springframework.data.repository.findByIdOrNull
 import org.springframework.http.HttpStatus
+import org.springframework.stereotype.Service
 import org.springframework.web.server.ResponseStatusException
-
+@Service
 class MessageServiceImpl (private val messageRepository: MessageRepository) : MessageService {
     override fun saveMessage(message: Message): Message = messageRepository.save(message)
 
