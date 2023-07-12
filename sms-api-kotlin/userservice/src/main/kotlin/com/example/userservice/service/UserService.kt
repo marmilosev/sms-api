@@ -8,9 +8,7 @@ interface UserService {
         val id = Math.random().toLong()
         return saveUser(user)
     }
-
     fun getAllUsers(): List<User>
-
     fun getUserById(id: Long): User
     fun deleteUser(id: Long)
     fun updateUser(id: Long, user: User): User
