@@ -41,6 +41,10 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "RequestMappingsPanelOrder0": "0",
+    "RequestMappingsPanelOrder1": "1",
+    "RequestMappingsPanelWidth0": "75",
+    "RequestMappingsPanelWidth1": "75",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "WebServerToolWindowFactoryState": "false",
@@ -97,7 +101,7 @@
       <option name="presentableId" value="Default" />
       <updated>1689089602167</updated>
       <workItem from="1689089603358" duration="79000" />
-      <workItem from="1689143398565" duration="1957000" />
+      <workItem from="1689143398565" duration="4841000" />
     </task>
     <task id="LOCAL-00001" summary="updated">
       <option name="closed" value="true" />
@@ -123,7 +127,15 @@
       <option name="project" value="LOCAL" />
       <updated>1689145331448</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="updating controller to connect with userservice">
+      <option name="closed" value="true" />
+      <created>1689148591746</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1689148591746</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -133,6 +145,7 @@
     <MESSAGE value="updated" />
     <MESSAGE value="model, service and dto created" />
     <MESSAGE value="controller for message CRUD created" />
-    <option name="LAST_COMMIT_MESSAGE" value="controller for message CRUD created" />
+    <MESSAGE value="updating controller to connect with userservice" />
+    <option name="LAST_COMMIT_MESSAGE" value="updating controller to connect with userservice" />
   </component>
 </project>

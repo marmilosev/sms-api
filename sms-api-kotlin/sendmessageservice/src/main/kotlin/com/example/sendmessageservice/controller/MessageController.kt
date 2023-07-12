@@ -4,12 +4,15 @@ import com.example.sendmessageservice.controller.dto.ApiResponse
 import com.example.sendmessageservice.controller.dto.MessageDto
 import com.example.sendmessageservice.controller.dto.UserDto
 import com.example.sendmessageservice.model.Message
+import com.example.sendmessageservice.model.toMessageDto
 import com.example.sendmessageservice.service.MessageServiceImpl
 import org.modelmapper.ModelMapper
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
+import org.springframework.web.client.RestTemplate
 import org.springframework.web.reactive.function.client.WebClient
+import java.util.stream.Collectors
 
 @RestController
 @RequestMapping("v1/messages")
@@ -17,31 +20,13 @@ class MessageController(val messageServiceImpl: MessageServiceImpl) {
 
     private var apiResponse: ApiResponse? = null
     var modelMapper : ModelMapper = ModelMapper()
-    lateinit var webClientBuilder: WebClient.Builder
 
-//    @GetMapping
-//    fun getAllMessages(): List<MessageDto?>? {
-//        return messageServiceImpl.getAllMessages().stream()
-//            .map {it.toMessageDto()}
-//            .collect(Collectors.toList())
-//    }
-@GetMapping
-fun getAllMessages(): MutableList<MessageDto?>? {
-    val messages: List<Message> = messageServiceImpl.getAllMessages()
-    val messageDtos: MutableList<MessageDto> = ArrayList()
-    for (message in messages) {
-        val userDto: UserDto = webClientBuilder.build()
-            .get()
-            .uri("http://localhost:8081/v1/users/1", message.userId())
-            .retrieve()
-            .bodyToMono<UserDto>(UserDto::class.java)
-            .block()
-        val messageDto = modelMapper.map(message, MessageDto::class.java)
-        messageDto.userId(userDto)
-        messageDtos.add(messageDto)
+    @GetMapping
+    fun getAllMessages(): List<MessageDto?>? {
+        return messageServiceImpl.getAllMessages().stream()
+            .map {it.toMessageDto()}
+            .collect(Collectors.toList())
     }
-    return messageDtos
-}
     @GetMapping("/{id}")
     fun getMessage(@PathVariable id: Long): ResponseEntity<MessageDto> {
         val message = messageServiceImpl.getMessageById(id)
