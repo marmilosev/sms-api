@@ -4,7 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="8a9e21c4-feb2-4f56-808c-f9b535938e89" name="Changes" comment="" />
+    <list default="true" id="8a9e21c4-feb2-4f56-808c-f9b535938e89" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sendmessageservice/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/sendmessageservice/src/main/resources/application.properties" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -39,31 +42,31 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RequestMappingsPanelOrder0": "0",
-    "RequestMappingsPanelOrder1": "1",
-    "RequestMappingsPanelWidth0": "75",
-    "RequestMappingsPanelWidth1": "75",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "last_opened_file_path": "/home/marija/Documents/GitHub/sms-api/sms-api-kotlin",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "spring.configuration.checksum": "51171fda7bbeebed2ad7fc948e8d2da3",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
+    &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
+    &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
+    &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/home/marija/Documents/GitHub/sms-api/sms-api-kotlin&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;spring.configuration.checksum&quot;: &quot;51171fda7bbeebed2ad7fc948e8d2da3&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   },
-  "keyToStringList": {
-    "GitStage.ChangesTree.GroupingKeys": [
-      "directory",
-      "module",
-      "repository"
+  &quot;keyToStringList&quot;: {
+    &quot;GitStage.ChangesTree.GroupingKeys&quot;: [
+      &quot;directory&quot;,
+      &quot;module&quot;,
+      &quot;repository&quot;
     ]
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="MoveKotlinTopLevelDeclarationsDialog.RECENTS_KEY">
       <recent name="com.example.sendmessageservice.controller.dto" />
@@ -101,7 +104,8 @@
       <option name="presentableId" value="Default" />
       <updated>1689089602167</updated>
       <workItem from="1689089603358" duration="79000" />
-      <workItem from="1689143398565" duration="4841000" />
+      <workItem from="1689143398565" duration="9611000" />
+      <workItem from="1689317786152" duration="435000" />
     </task>
     <task id="LOCAL-00001" summary="updated">
       <option name="closed" value="true" />
@@ -135,7 +139,15 @@
       <option name="project" value="LOCAL" />
       <updated>1689148591746</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="controllers updated">
+      <option name="closed" value="true" />
+      <created>1689153890991</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1689153890991</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -146,6 +158,7 @@
     <MESSAGE value="model, service and dto created" />
     <MESSAGE value="controller for message CRUD created" />
     <MESSAGE value="updating controller to connect with userservice" />
-    <option name="LAST_COMMIT_MESSAGE" value="updating controller to connect with userservice" />
+    <MESSAGE value="controllers updated" />
+    <option name="LAST_COMMIT_MESSAGE" value="controllers updated" />
   </component>
 </project>
