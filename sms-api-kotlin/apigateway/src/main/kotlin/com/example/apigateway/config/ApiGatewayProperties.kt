@@ -24,7 +24,7 @@ class ApiGatewayProperties {
 
     private val log: Logger = LoggerFactory.getLogger(ApiGatewayProperties::class.java)
 
-    fun logGatewayProperties() {
-        ApiGatewayProperties.log.info("***** Gateway Properties: {}", toString())
-    }
+//    fun logGatewayProperties() {
+//        ApiGatewayProperties.log.info("***** Gateway Properties: {}", toString())
+//    }
 }

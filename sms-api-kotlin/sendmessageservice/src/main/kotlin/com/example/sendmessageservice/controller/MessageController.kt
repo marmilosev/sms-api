@@ -23,33 +23,51 @@ class MessageController(val messageServiceImpl: MessageServiceImpl) {
 
     @GetMapping
     fun getAllMessages(): List<MessageDto?>? {
-        return messageServiceImpl.getAllMessages().stream()
-            .map {it.toMessageDto()}
+        val messages: List<Message> = messageServiceImpl.getAllMessages()
+
+        val messageDtos: List<MessageDto?>? = messages.stream()
+            .map { message ->
+                val userDto: UserDto? = WebClient.builder()
+                    .baseUrl("http://localhost:8081/v1/users")
+                    .build()
+                    .get()
+                    .uri("/{id}", message.userId)
+                    .retrieve()
+                    .bodyToMono(UserDto::class.java)
+                    .block()
+                val messageDto: MessageDto? = modelMapper.map(message, MessageDto::class.java)
+                messageDto?.userId = userDto?.idUser
+                messageDto
+            }
             .collect(Collectors.toList())
+
+        return messageDtos
     }
+
     @GetMapping("/{id}")
     fun getMessage(@PathVariable id: Long): ResponseEntity<MessageDto> {
         val message = messageServiceImpl.getMessageById(id)
-        val messageRequest: MessageDto = modelMapper.map(message, MessageDto::class.java)
-        return ResponseEntity.ok().body(messageRequest)
+
+        val userDto: UserDto? = WebClient.builder()
+            .baseUrl("http://localhost:8081/v1/users")
+            .build()
+            .get()
+            .uri("/{id}", message.userId)
+            .retrieve()
+            .bodyToMono(UserDto::class.java)
+            .block()
+
+        val messageDto: MessageDto = modelMapper.map(message, MessageDto::class.java)
+        messageDto.userId = userDto?.idUser
+
+        return ResponseEntity.ok().body(messageDto)
     }
-//    @PostMapping("/add")
-//    fun createMessage(@RequestBody messageDto: MessageDto?): ResponseEntity<ApiResponse?>? {
-//        val messageRequest: Message = modelMapper.map(messageDto, Message::class.java)
-//        val createdMessage: Message = messageServiceImpl.saveMessage(messageRequest)
-//        val message = modelMapper.map(createdMessage, MessageDto::class.java)
-//        apiResponse = ApiResponse(
-//            "5",
-//            "Message created successfully.",
-//            "https://mmilosevic-diplomski-api.com/messages/v1/4"
-//        )
-//        return ResponseEntity.status(HttpStatus.OK).body(apiResponse)
-//    }
-        @PostMapping("/add")
-        fun createMessage(@RequestBody messageDto: MessageDto?): ResponseEntity<ApiResponse?>? {
-            val apiResponse = ApiResponse()
-            // Fetch user details from user service based on user ID
-            val userDto: UserDto? = WebClient.builder()
+
+    @PostMapping("/add")
+    fun createMessage(@RequestBody messageDto: MessageDto?): ResponseEntity<ApiResponse?>? {
+        val apiResponse = ApiResponse()
+        // Fetch user details from user service based on user ID
+        val userDto: UserDto? = WebClient.builder()
                 .baseUrl("http://localhost:8081/v1/users")
                 .build()
                 .get()
@@ -58,18 +76,17 @@ class MessageController(val messageServiceImpl: MessageServiceImpl) {
                 .bodyToMono(UserDto::class.java)
                 .block()
             // Set the user details in the message
-            messageDto?.userId = userDto?.idUser
-            val messageRequest = modelMapper.map(
-                messageDto,
-                Message::class.java
-            )
-            val message: Message = messageServiceImpl.saveMessage(messageRequest)
-
-            apiResponse.code = "5"
-            apiResponse.message = "Message created successfully."
-            apiResponse.docsURL = "https://mmilosevic-diplomski-api.com/messages/v1/${message.idMessage}"
-            return ResponseEntity.status(HttpStatus.OK).body(apiResponse)
-}
+        messageDto?.userId = userDto?.idUser
+        val messageRequest = modelMapper.map(
+             messageDto,
+             Message::class.java
+        )
+        val message: Message = messageServiceImpl.saveMessage(messageRequest)
+        apiResponse.code = "5"
+        apiResponse.message = "Message created successfully."
+        apiResponse.docsURL = "https://mmilosevic-diplomski-api.com/messages/v1/${message.idMessage}"
+        return ResponseEntity.status(HttpStatus.OK).body(apiResponse)
+    }
 
     @DeleteMapping("/{id}")
     fun deleteMessage(@PathVariable id: Long) : ResponseEntity<ApiResponse> {
@@ -85,14 +102,28 @@ class MessageController(val messageServiceImpl: MessageServiceImpl) {
     fun updateMessage(@PathVariable id: Long, @RequestBody messageDto: MessageDto): ResponseEntity<ApiResponse> {
         val messageRequest = modelMapper.map(messageDto, Message::class.java)
         messageRequest.idMessage = id
-        val message: Message = messageServiceImpl.updateMessage(id,messageRequest)
-        val messageResponse = modelMapper.map(message, MessageDto::class.java)
-        apiResponse = ApiResponse(
+
+        val userDto: UserDto? = WebClient.builder()
+            .baseUrl("http://localhost:8081/v1/users")
+            .build()
+            .get()
+            .uri("/{id}", messageDto.userId)
+            .retrieve()
+            .bodyToMono(UserDto::class.java)
+            .block()
+
+        messageDto.userId = userDto?.idUser
+        val updatedMessageRequest = modelMapper.map(messageDto, Message::class.java)
+        updatedMessageRequest.idMessage = id
+
+        val updatedMessage: Message = messageServiceImpl.updateMessage(id, updatedMessageRequest)
+        val updatedMessageDto = modelMapper.map(updatedMessage, MessageDto::class.java)
+        val apiResponse = ApiResponse(
             "6",
             "Message with id $id has been updated successfully.",
-            "https://mmilosevic-diplomski-api.com/messages/v1/6"
+            "https://mmilosevic-diplomski-api.com/messages/v1/$id"
         )
         return ResponseEntity.status(HttpStatus.OK).body(apiResponse)
-
     }
+
 }

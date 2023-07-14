@@ -1,45 +1,45 @@
-server:
-  port: 8080
-
-spring:
-  application:
-    name: api-gateway
-#  cloud:
-#    gateway:
-#      routes:
-#        - id: USER-SERVICE
-#          uri: lb://USER-SERVICE
-#          predicates:
-#            - Header=Authorization, Bearer (.*)
-#            - Path=/api/users/**
-#        - id: AUTH-SERVICE
-#          uri: lb://AUTH-SERVICE
-#          predicates:
-#            - Path=/api/auth/**
-
-eureka:
-  client:
-    registerWithEureka: true
-    fetchRegistry: true
-    serviceUrl:
-      defaultZone: http://localhost:8761/eureka/
-
-management:
-  endpoints:
-    web:
-      exposure:
-        include: '*'
-
-gateway:
-  expose-unsecured-urls: true
-  unsecured-urls:
-    - /api/auth/login
-    - /api/auth/validate
-
-#  spring.cloud.gateway.routes[1].id=DEPARTMENT-SERVICE
-#  spring.cloud.gateway.routes[1].uri=lb://DEPARTMENT-SERVICE
-#  spring.cloud.gateway.routes[1].predicates[0]=Path=/api/departments/**
+#server:
+#  port: 8080
 #
-#  spring.cloud.gateway.routes[2].id=DEPARTMENT-SERVICE
-#  spring.cloud.gateway.routes[2].uri=lb://DEPARTMENT-SERVICE
-#  spring.cloud.gateway.routes[2].predicates[0]=Path=/message/**
+#spring:
+#  application:
+#    name: api-gateway
+##  cloud:
+##    gateway:
+##      routes:
+##        - id: USER-SERVICE
+##          uri: lb://USER-SERVICE
+##          predicates:
+##            - Header=Authorization, Bearer (.*)
+##            - Path=/api/users/**
+##        - id: AUTH-SERVICE
+##          uri: lb://AUTH-SERVICE
+##          predicates:
+##            - Path=/api/auth/**
+#
+#eureka:
+#  client:
+#    registerWithEureka: true
+#    fetchRegistry: true
+#    serviceUrl:
+#      defaultZone: http://localhost:8761/eureka/
+#
+#management:
+#  endpoints:
+#    web:
+#      exposure:
+#        include: '*'
+#
+#gateway:
+#  expose-unsecured-urls: true
+#  unsecured-urls:
+#    - /api/auth/login
+#    - /api/auth/validate
+#
+##  spring.cloud.gateway.routes[1].id=DEPARTMENT-SERVICE
+##  spring.cloud.gateway.routes[1].uri=lb://DEPARTMENT-SERVICE
+##  spring.cloud.gateway.routes[1].predicates[0]=Path=/api/departments/**
+##
+##  spring.cloud.gateway.routes[2].id=DEPARTMENT-SERVICE
+##  spring.cloud.gateway.routes[2].uri=lb://DEPARTMENT-SERVICE
+##  spring.cloud.gateway.routes[2].predicates[0]=Path=/message/**

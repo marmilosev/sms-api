@@ -15,6 +15,7 @@ import org.springframework.security.web.server.SecurityWebFilterChain
 class ApiGatewayConfig {
     @Autowired
     var filter: AuthenticationFilter? = null
+
     @Bean
     fun routes(builder: RouteLocatorBuilder): RouteLocator {
         return builder.routes()
@@ -55,10 +56,8 @@ class ApiGatewayConfig {
     }
 
     @Bean
-    fun filterChain(http: ServerHttpSecurity): SecurityWebFilterChain {
-        http
-            .csrf()
-            .disable()
+    fun securityFilterChain(http: ServerHttpSecurity): SecurityWebFilterChain {
+        http.csrf().disable()
         return http.build()
     }
 }
