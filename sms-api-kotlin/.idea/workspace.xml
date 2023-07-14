@@ -105,7 +105,7 @@
       <updated>1689089602167</updated>
       <workItem from="1689089603358" duration="79000" />
       <workItem from="1689143398565" duration="9611000" />
-      <workItem from="1689317786152" duration="777000" />
+      <workItem from="1689317786152" duration="435000" />
     </task>
     <task id="LOCAL-00001" summary="updated">
       <option name="closed" value="true" />
@@ -147,23 +147,7 @@
       <option name="project" value="LOCAL" />
       <updated>1689153890991</updated>
     </task>
-    <task id="LOCAL-00006" summary="application.properties for sendmessageservice">
-      <option name="closed" value="true" />
-      <created>1689318308094</created>
-      <option name="number" value="00006" />
-      <option name="presentableId" value="LOCAL-00006" />
-      <option name="project" value="LOCAL" />
-      <updated>1689318308094</updated>
-    </task>
-    <task id="LOCAL-00007" summary="adding .gitignore">
-      <option name="closed" value="true" />
-      <created>1689318563088</created>
-      <option name="number" value="00007" />
-      <option name="presentableId" value="LOCAL-00007" />
-      <option name="project" value="LOCAL" />
-      <updated>1689318563088</updated>
-    </task>
-    <option name="localTasksCounter" value="8" />
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -175,8 +159,6 @@
     <MESSAGE value="controller for message CRUD created" />
     <MESSAGE value="updating controller to connect with userservice" />
     <MESSAGE value="controllers updated" />
-    <MESSAGE value="application.properties for sendmessageservice" />
-    <MESSAGE value="adding .gitignore" />
-    <option name="LAST_COMMIT_MESSAGE" value="adding .gitignore" />
+    <option name="LAST_COMMIT_MESSAGE" value="controllers updated" />
   </component>
 </project>
