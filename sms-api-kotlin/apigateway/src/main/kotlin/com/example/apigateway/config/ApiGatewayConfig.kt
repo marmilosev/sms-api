@@ -55,9 +55,9 @@ class ApiGatewayConfig {
             .build()
     }
 
-    @Bean
-    fun securityFilterChain(http: ServerHttpSecurity): SecurityWebFilterChain {
-        http.csrf().disable()
-        return http.build()
-    }
+//    @Bean
+//    fun securityFilterChain(http: ServerHttpSecurity): SecurityWebFilterChain {
+//        http.csrf().disable()
+//        return http.build()
+//    }
 }
