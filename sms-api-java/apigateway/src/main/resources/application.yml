@@ -35,6 +35,7 @@ gateway:
   unsecured-urls:
     - /api/auth/login
     - /api/auth/validate
+    - /api/auth/register
 
 #  spring.cloud.gateway.routes[1].id=DEPARTMENT-SERVICE
 #  spring.cloud.gateway.routes[1].uri=lb://DEPARTMENT-SERVICE
