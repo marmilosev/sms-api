@@ -1,6 +1,6 @@
 package com.example.mydemoproject.authservice.exception;
 
-import com.example.mydemoproject.userservice.controller.dto.ApiResponse;
+import com.example.mydemoproject.authservice.dto.ApiResponse;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 @RestControllerAdvice

@@ -28,7 +28,6 @@ public class AuthenticationController {
     private UserService userService;
     @Autowired
     private ModelMapper modelMapper;
-    ApiResponse apiResponse;
     final static Logger logger = LoggerFactory.getLogger(AuthenticationController.class);
 
     @Autowired
@@ -51,6 +50,7 @@ public class AuthenticationController {
         User userRequest = modelMapper.map(userDto, User.class);
         User user = userService.saveUser(userRequest);
         UserDto userResponse = modelMapper.map(user, UserDto.class);
+        ApiResponse apiResponse;
         apiResponse = new ApiResponse();
         apiResponse.setCode("8");
         apiResponse.setMessage("User with username " + userDto.getUsername() + " successfully created.");
