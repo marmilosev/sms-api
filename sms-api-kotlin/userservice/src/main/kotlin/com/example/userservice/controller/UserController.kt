@@ -35,7 +35,7 @@ class UserController (val userServiceImpl: UserServiceImpl){
         apiResponse = ApiResponse(
             "8",
             "User with username ${savedUser.username} successfully created.",
-            "https://mmilosevic-diplomski-api.com/users/v1/8"
+            "https://oziz.ffos.hr/nastava20192020/mmilosevic_19/DiplomskiRad/HTML-API-Docs/users/v1/index.html"
         )
         return ResponseEntity.status(HttpStatus.OK).body(apiResponse)
     }
@@ -47,7 +47,7 @@ class UserController (val userServiceImpl: UserServiceImpl){
         apiResponse = ApiResponse(
             "11",
             "Deleted",
-            "https://mmilosevic-diplomski-api.com/users/v1/11"
+            "https://oziz.ffos.hr/nastava20192020/mmilosevic_19/DiplomskiRad/HTML-API-Docs/users/v1/index.html"
         )
         return ResponseEntity.status(HttpStatus.OK).body(apiResponse)
     }
@@ -59,7 +59,7 @@ class UserController (val userServiceImpl: UserServiceImpl){
         apiResponse = ApiResponse(
             "9",
             "User with username ${updatedUser.username} successfully updated.",
-            "https://mmilosevic-diplomski-api.com/users/v1/9"
+            "https://oziz.ffos.hr/nastava20192020/mmilosevic_19/DiplomskiRad/HTML-API-Docs/users/v1/index.html"
         )
         return ResponseEntity.status(HttpStatus.OK).body(apiResponse)
     }
