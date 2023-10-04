@@ -44,7 +44,7 @@ public class MessageController {
 
         apiResponse.setCode("5");
         apiResponse.setMessage("Message created successfully.");
-        apiResponse.setDocsURL("https://mmilosevic-diplomski-api.com/messages/v1/" + message.getIdMessage());
+        apiResponse.setDocsURL("https://oziz.ffos.hr/nastava20192020/mmilosevic_19/DiplomskiRad/HTML-API-Docs/sms/v1/index.html");
         return ResponseEntity.status(HttpStatus.OK).body(apiResponse);
     }
 
@@ -104,8 +104,8 @@ public class MessageController {
 
         ApiResponse apiResponse = new ApiResponse();
         apiResponse.setCode("6");
-        apiResponse.setMessage("Message updated successfully.");
-        apiResponse.setDocsURL("https://mmilosevic-diplomski-api.com/messages/v1/" + message.getIdMessage());
+        apiResponse.setMessage("Message with id " + message.getIdMessage()  + " updated successfully.");
+        apiResponse.setDocsURL("https://oziz.ffos.hr/nastava20192020/mmilosevic_19/DiplomskiRad/HTML-API-Docs/sms/v1/index.html");
         return ResponseEntity.status(HttpStatus.OK).body(apiResponse);
     }
 
@@ -115,7 +115,7 @@ public class MessageController {
         messageService.deleteMessage(id);
         apiResponse.setCode("7");
         apiResponse.setMessage("Message with id " + id + " has been deleted successfully.");
-        apiResponse.setDocsURL("https://mmilosevic-diplomski-api.com/messages/v1/7");
+        apiResponse.setDocsURL("https://oziz.ffos.hr/nastava20192020/mmilosevic_19/DiplomskiRad/HTML-API-Docs/sms/v1/index.html");
         return ResponseEntity.status(HttpStatus.OK).body(apiResponse);
     }
 
