@@ -110,7 +110,7 @@ class SmsController {
             apiResponse = ApiResponse(
                 "5",
                 "Message sent",
-                "https://mmilosevic-diplomski-api.com/sms/v1/5",
+                "https://oziz.ffos.hr/nastava20192020/mmilosevic_19/DiplomskiRad/HTML-API-Docs/sms/v1/index.html",
                 smsResponse.messages
             )
             //            apiResponse.setTimestamp((Timestamp) new Date());
@@ -120,7 +120,7 @@ class SmsController {
             apiResponse = ApiResponse(
                 "6",
                 apiException.rawResponseBody(),
-                "https://mmilosevic-diplomski-api.com/sms/v1/6"
+                "https://oziz.ffos.hr/nastava20192020/mmilosevic_19/DiplomskiRad/HTML-API-Docs/sms/v1/index.html"
             )
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body<ApiResponse>(apiResponse)
         }
