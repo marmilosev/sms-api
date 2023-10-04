@@ -121,14 +121,14 @@ public class SmsController {
             apiResponse.setCode("5");
             apiResponse.setMessage("Message sent");
             apiResponse.setSmsResponseDetails(smsResponse.getMessages());
-            apiResponse.setDocsURL("https://mmilosevic-diplomski-api.com/sms/v1/5");
+            apiResponse.setDocsURL("https://oziz.ffos.hr/nastava20192020/mmilosevic_19/DiplomskiRad/HTML-API-Docs/sms/v1/index.html");
 //            apiResponse.setTimestamp((Timestamp) new Date());
             return ResponseEntity.status(HttpStatus.OK).body(apiResponse);
         } catch (ApiException apiException) {
             apiException.printStackTrace();
             apiResponse.setCode("6");
             apiResponse.setMessage(apiException.rawResponseBody());
-            apiResponse.setDocsURL("\"https://mmilosevic-diplomski-api.com/sms/v1/6");
+            apiResponse.setDocsURL("https://oziz.ffos.hr/nastava20192020/mmilosevic_19/DiplomskiRad/HTML-API-Docs/sms/v1/index.html");
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(apiResponse);
         }
     }
