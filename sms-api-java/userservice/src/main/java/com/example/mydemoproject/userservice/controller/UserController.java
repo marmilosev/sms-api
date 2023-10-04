@@ -32,7 +32,7 @@ public class UserController {
         apiResponse = new ApiResponse();
         apiResponse.setCode("8");
         apiResponse.setMessage("User with username " + userDto.getUsername() + " successfully created.");
-        apiResponse.setDocsURL("https://mmilosevic-diplomski-api.com/users/v1/8");
+        apiResponse.setDocsURL("ttps://oziz.ffos.hr/nastava20192020/mmilosevic_19/DiplomskiRad/HTML-API-Docs/users/v1/index.html");
         return ResponseEntity.status(HttpStatus.OK).body(apiResponse);
     }
     @GetMapping
@@ -58,7 +58,7 @@ public class UserController {
         UserDto userResponse = modelMapper.map(user, UserDto.class);
         apiResponse.setCode("9");
         apiResponse.setMessage("User with username " + userDto.getUsername() + " successfully updated.");
-        apiResponse.setDocsURL("https://mmilosevic-diplomski-api.com/users/v1/9");
+        apiResponse.setDocsURL("ttps://oziz.ffos.hr/nastava20192020/mmilosevic_19/DiplomskiRad/HTML-API-Docs/users/v1/index.html");
         return ResponseEntity.status(HttpStatus.OK).body(apiResponse);
     }
     @DeleteMapping("/{id}")
@@ -67,7 +67,7 @@ public class UserController {
         apiResponse = new ApiResponse();
         apiResponse.setCode("11");
         apiResponse.setMessage("User successfully deleted.");
-        apiResponse.setDocsURL("https://mmilosevic-diplomski-api.com/users/v1/11");
+        apiResponse.setDocsURL("ttps://oziz.ffos.hr/nastava20192020/mmilosevic_19/DiplomskiRad/HTML-API-Docs/users/v1/index.html");
         return ResponseEntity.status(HttpStatus.OK).body(apiResponse);
     }
 
