@@ -84,7 +84,7 @@ class MessageController(val messageServiceImpl: MessageServiceImpl) {
         val message: Message = messageServiceImpl.saveMessage(messageRequest)
         apiResponse.code = "5"
         apiResponse.message = "Message created successfully."
-        apiResponse.docsURL = "https://oziz.ffos.hr/nastava20192020/mmilosevic_19/DiplomskiRad/HTML-API-Docs/sms/v1/index.html"
+        apiResponse.docsURL = "https://oziz.ffos.hr/nastava20192020/mmilosevic_19/DiplomskiRad/HTML-API-Docs/messages/v1/index.html"
         return ResponseEntity.status(HttpStatus.OK).body(apiResponse)
     }
 
@@ -121,7 +121,7 @@ class MessageController(val messageServiceImpl: MessageServiceImpl) {
         val apiResponse = ApiResponse(
             "6",
             "Message with id $id has been updated successfully.",
-            "https://oziz.ffos.hr/nastava20192020/mmilosevic_19/DiplomskiRad/HTML-API-Docs/sms/v1/index.html"
+            "https://oziz.ffos.hr/nastava20192020/mmilosevic_19/DiplomskiRad/HTML-API-Docs/messages/v1/index.html"
         )
         return ResponseEntity.status(HttpStatus.OK).body(apiResponse)
     }
